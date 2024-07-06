@@ -1,6 +1,6 @@
-# Saude + Solidaria
+# Saúde + Solidária
 
-Este projeto foi desenvolvido como parte da disciplina Projeto Integrador IV: Desenvolvimento de sistemas orientado a dispositivos móveis e baseados na web
+Este projeto foi desenvolvido como parte da disciplina Projeto Integrador IV: Desenvolvimento de sistemas orientado a dispositivos móveis e baseados na web.
 
 <div align="center">
   
