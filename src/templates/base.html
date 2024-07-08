@@ -14,7 +14,11 @@
       href="{{ url_for('static', filename='css/main.css') }}"
     />
 
-    <title>{% block title %}Base{% endblock %}</title>
+    {% if title %}
+    <title>Saúde + Solidária • {{ title }}</title>
+    {% else %}
+    <title>Saúde + Solidária</title>
+    {% endif %}
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">

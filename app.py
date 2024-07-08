@@ -4,7 +4,7 @@ from src import create_app
 
 def main() -> None:
     app = create_app(config='development')
-    app.run()
+    app.run(debug=True)
 
 
 if __name__ == '__main__':
