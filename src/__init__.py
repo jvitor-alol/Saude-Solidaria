@@ -1,9 +1,11 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 from config import configurations
 
 db = SQLAlchemy()
+migrate = Migrate()
 
 
 def create_app(config='default') -> Flask:
@@ -11,6 +13,7 @@ def create_app(config='default') -> Flask:
     app.config.from_object(configurations[config])
 
     db.init_app(app)
+    migrate.init_app(app, db)
 
     from .auth import auth
     from .views import views

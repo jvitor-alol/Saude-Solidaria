@@ -1,5 +1,9 @@
+import os
 from datetime import datetime, timezone
+
 from . import db
+
+base_dir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Usuario(db.Model):
@@ -15,14 +19,16 @@ class Usuario(db.Model):
     cidade = db.Column(db.String(100))
     estado = db.Column(db.String(100))
     pais = db.Column(db.String(100), default='Brasil')
-    data_nascimento = db.Column(db.Date)
+    data_nascimento = db.Column(db.Date, nullable=False)
     genero = db.Column(db.String(20))
-    foto_perfil = db.Column(db.Text)  # url da foto de perfil
+    foto_perfil = db.Column(
+        db.Text, nullable=False,
+        default=os.path.join(base_dir, 'static/images/default_avatar.png'))
     bio = db.Column(db.Text)
     data_registro = db.Column(
-        db.DateTime, default=lambda: datetime.now(timezone.utc),
+        db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc),
         nullable=False)
-    ultimo_login = db.Column(db.DateTime)
+    ultimo_login = db.Column(db.DateTime(timezone=True))
     status = db.Column(db.String(20), default='ativo')
     notificacoes = db.Column(db.Boolean, default=True)
     tipo_usuario = db.Column(
@@ -63,9 +69,9 @@ class Post(db.Model):
     estrelas = db.Column(db.SmallInteger, default=0)
     num_votos = db.Column(db.Integer, default=0)
     data_publicacao = db.Column(
-        db.DateTime, default=lambda: datetime.now(timezone.utc),
+        db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc),
         nullable=False)
-    ultima_atualizacao = db.Column(db.DateTime)
+    ultima_atualizacao = db.Column(db.DateTime(timezone=True))
     autor_id = db.Column(db.Integer, db.ForeignKey(
         'usuarios.id'), nullable=False)
 
@@ -83,7 +89,7 @@ class Comentario(db.Model):
     estrelas = db.Column(db.SmallInteger, default=0)
     num_votos = db.Column(db.Integer, default=0)
     data_comentario = db.Column(
-        db.DateTime, default=lambda: datetime.now(timezone.utc),
+        db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc),
         nullable=False)
     autor_id = db.Column(db.Integer, db.ForeignKey(
         'usuarios.id'), nullable=False)
@@ -106,7 +112,7 @@ class Favorito(db.Model):
         'usuarios.id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
     data_adicao = db.Column(
-        db.DateTime, default=lambda: datetime.now(timezone.utc),
+        db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc),
         nullable=False)
 
     usuario = db.relationship(
@@ -125,7 +131,7 @@ class LerMaisTarde(db.Model):
         'usuarios.id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
     data_adicao = db.Column(
-        db.DateTime, default=lambda: datetime.now(timezone.utc),
+        db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc),
         nullable=False)
 
     usuario = db.relationship(
@@ -147,7 +153,7 @@ class Report(db.Model):
     motivo = db.Column(db.Text, nullable=False)
     descricao = db.Column(db.Text)
     data_report = db.Column(
-        db.DateTime, default=lambda: datetime.now(timezone.utc),
+        db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc),
         nullable=False)
 
     usuario = db.relationship(
