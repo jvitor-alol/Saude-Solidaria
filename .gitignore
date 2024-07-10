@@ -163,3 +163,5 @@ cython_debug/
 
 # Infra
 postgres_data/
+# .gitignore
+.env
