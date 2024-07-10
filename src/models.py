@@ -19,7 +19,7 @@ class Usuario(db.Model):
     cidade = db.Column(db.String(100))
     estado = db.Column(db.String(100))
     pais = db.Column(db.String(100), default='Brasil')
-    data_nascimento = db.Column(db.Date, nullable=False)
+    data_nascimento = db.Column(db.Date)
     genero = db.Column(db.String(20))
     foto_perfil = db.Column(
         db.Text, nullable=False,
@@ -34,12 +34,14 @@ class Usuario(db.Model):
     tipo_usuario = db.Column(
         db.String(20), default='comum', nullable=False)  # 'comum' ou 'medico'
 
-    posts = db.relationship('Post', backref='autor', lazy=True)
-    comentarios = db.relationship('Comentario', backref='autor', lazy=True)
-    favoritos = db.relationship('Favorito', backref='usuario', lazy=True)
+    posts = db.relationship('Post', backref='autor_post', lazy=True)
+    comentarios = db.relationship(
+        'Comentario', backref='autor_comentario', lazy=True)
+    favoritos = db.relationship(
+        'Favorito', backref='usuario_favorito', lazy=True)
     ler_mais_tarde = db.relationship(
-        'LerMaisTarde', backref='usuario', lazy=True)
-    reports = db.relationship('Report', backref='usuario', lazy=True)
+        'LerMaisTarde', backref='usuario_ler_mais_tarde', lazy=True)
+    reports = db.relationship('Report', backref='usuario_report', lazy=True)
 
     def __repr__(self) -> str:
         return f"User({self.nome_usuario=}, {self.email=})"
@@ -75,7 +77,8 @@ class Post(db.Model):
     autor_id = db.Column(db.Integer, db.ForeignKey(
         'usuarios.id'), nullable=False)
 
-    autor = db.relationship('Usuario', backref=db.backref('posts', lazy=True))
+    autor = db.relationship(
+        'Usuario', backref=db.backref('postagens', lazy=True))
 
     def __repr__(self) -> str:
         return f"Post({self.id=}, {self.titulo=}, {self.autor_id=})"
@@ -96,12 +99,12 @@ class Comentario(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
 
     autor = db.relationship(
-        'Usuario', backref=db.backref('comentarios', lazy=True))
+        'Usuario', backref=db.backref('comentarios_usuario', lazy=True))
     post = db.relationship(
-        'Post', backref=db.backref('comentarios', lazy=True))
+        'Post', backref=db.backref('comentarios_post', lazy=True))
 
     def __repr__(self) -> str:
-        return f"Comentario({self.id=}, {self.autor_id=}), {self.post_id=})"
+        return f"Comentario({self.id=}, {self.autor_id=}, {self.post_id=})"
 
 
 class Favorito(db.Model):
@@ -116,8 +119,9 @@ class Favorito(db.Model):
         nullable=False)
 
     usuario = db.relationship(
-        'Usuario', backref=db.backref('favoritos', lazy=True))
-    post = db.relationship('Post', backref=db.backref('favoritos', lazy=True))
+        'Usuario', backref=db.backref('favoritos_usuario', lazy=True))
+    post = db.relationship(
+        'Post', backref=db.backref('favoritos_post', lazy=True))
 
     def __repr__(self) -> str:
         return f"Favorito({self.id=}, {self.usuario_id=}, {self.post_id=})"
@@ -135,9 +139,9 @@ class LerMaisTarde(db.Model):
         nullable=False)
 
     usuario = db.relationship(
-        'Usuario', backref=db.backref('ler_mais_tarde', lazy=True))
+        'Usuario', backref=db.backref('ler_mais_tarde_usuario', lazy=True))
     post = db.relationship(
-        'Post', backref=db.backref('ler_mais_tarde', lazy=True))
+        'Post', backref=db.backref('ler_mais_tarde_post', lazy=True))
 
     def __repr__(self) -> str:
         return f"LerMaisTarde({self.id=}, {self.usuario_id=}, {self.post_id=})"
@@ -157,8 +161,9 @@ class Report(db.Model):
         nullable=False)
 
     usuario = db.relationship(
-        'Usuario', backref=db.backref('reports', lazy=True))
-    post = db.relationship('Post', backref=db.backref('reports', lazy=True))
+        'Usuario', backref=db.backref('reports_usuario', lazy=True))
+    post = db.relationship(
+        'Post', backref=db.backref('reports_post', lazy=True))
 
     def __repr__(self) -> str:
         return f"Report({self.id=}, {self.usuario_id=}, {self.post_id=})"

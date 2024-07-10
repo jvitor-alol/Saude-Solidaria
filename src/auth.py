@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
 
+from .models import Usuario
 from .forms import RegistrationForm, LoginForm
 
 auth = Blueprint('auth', __name__)
@@ -9,10 +10,12 @@ auth = Blueprint('auth', __name__)
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if (form.email.data == 'admin@admin.com' and
-                form.password.data == 'admin'):
+        user = Usuario.query.filter_by(email=form.email.data).first()
+        if user and user.senha == form.password.data:
             flash("Login com sucesso.", "success")
             return redirect(url_for('views.home'))
+        else:
+            flash("Login falhou. Verifique seu email e senha.", "danger")
     return render_template('login.html', title='Login', form=form)
 
 
