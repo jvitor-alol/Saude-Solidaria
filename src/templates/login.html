@@ -23,11 +23,11 @@
     </div>
 
     <div class="form-floating mb-3">
-      {{ form.password(class="form-control", id="floatingPassword",
-      placeholder="Senha") }} {{ form.password.label(class="form-label",
-      for="floatingPassword") }} {% if form.password.errors %}
+      {{ form.senha(class="form-control", id="floatingPassword",
+      placeholder="Senha") }} {{ form.senha.label(class="form-label",
+      for="floatingPassword") }} {% if form.senha.errors %}
       <div class="invalid-feedback d-block">
-        {% for error in form.password.errors %}
+        {% for error in form.senha.errors %}
         <span>{{ error }}</span>
         {% endfor %}
       </div>
@@ -35,9 +35,9 @@
     </div>
 
     <div class="form-check text-start my-3">
-      {{ form.remember_me(class="form-check-input", id="flexCheckDefault") }} {{
-      form.remember_me.label(class="form-check-label", for="flexCheckDefault")
-      }}
+      {{ form.lembre_de_mim(class="form-check-input", id="flexCheckDefault") }}
+      {{ form.lembre_de_mim.label(class="form-check-label",
+      for="flexCheckDefault") }}
     </div>
     {{ form.submit(class="btn btn-primary w-100 py-2") }}
   </form>
