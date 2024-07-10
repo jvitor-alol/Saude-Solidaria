@@ -1,7 +1,11 @@
 import os
 from datetime import datetime, timezone
 
-from . import db
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
+db = SQLAlchemy()
+migrate = Migrate()
 
 base_dir = os.path.abspath(os.path.dirname(__file__))
 
