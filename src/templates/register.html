@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% from 'bootstrap5/form.html' import render_form %}
+{% block content %}
+<div class="container">
+  <form method="POST" action="{{ url_for('auth.register') }}">
+    {{ render_form(form) }}
+  </form>
+</div>
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // Esconda os campos ao carregar a página
+    document.getElementById("crm").style.display = "none";
+    document.getElementById("especialidade").style.display = "none";
+  });
+
+  function userTypeCheck() {
+    var tipoUsuario = document.querySelector(
+      'input[name="tipo_usuario"]:checked'
+    ).value;
+    if (tipoUsuario === "medico") {
+      document.getElementById("crm").style.display = "block";
+      document.getElementById("especialidade").style.display = "block";
+    } else {
+      document.getElementById("crm").style.display = "none";
+      document.getElementById("especialidade").style.display = "none";
+    }
+  }
+
+  document.querySelectorAll('input[name="tipo_usuario"]').forEach((elem) => {
+    elem.addEventListener("change", userTypeCheck);
+  });
+</script>
+{% endblock content %}
