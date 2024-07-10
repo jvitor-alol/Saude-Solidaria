@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-from src import create_app
+from src import create_app, create_db
 
 
 def main() -> None:
     app = create_app()
+    create_db(app)
     app.run(debug=True)
 
 
