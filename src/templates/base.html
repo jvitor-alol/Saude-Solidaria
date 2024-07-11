@@ -13,6 +13,13 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/main.css') }}"
     />
+    <!-- Link google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
 
     {% if title %}
     <title>Saúde + Solidária • {{ title }}</title>
@@ -22,56 +29,83 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="{{ url_for('views.home') }}"
-                >Home</a
-              >
+    <header id="header" class="scroll">
+      <nav class="container">
+        <!-- Usuário -->
+        <div class="dropdown">
+          <button
+            class="btn"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              class="menu-icon"
+              src="{{ url_for('static', filename='icons/doutilizador.png') }}"
+              alt="usuário"
+            />
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <button class="dropdown-item" type="button">Minha conta</button>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+            <li>
+              <button class="dropdown-item" type="button">Desconectar</button>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('auth.register') }}"
-                >Registrar</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+            <li>
+              <button class="dropdown-item" type="button">
+                <img
+                  class="menu-icon"
+                  src="{{ url_for('static', filename='icons/dinterrogatorio.png') }}"
+                  alt="ajuda"
+                />
+              </button>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
         </div>
-      </div>
-    </nav>
+
+        <!-- Logo -->
+        <a class="logo" href="#">logo</a>
+
+        <!-- Menu -->
+        <div class="toggle icon-menu">
+          <button
+            class="btn"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#staticBackdrop"
+            aria-controls="staticBackdrop"
+          >
+            <img
+              class="menu-icon"
+              src="{{ url_for('static', filename='icons/menu-hamburger.png') }}"
+              alt="menu"
+            />
+          </button>
+        </div>
+        <div
+          class="offcanvas offcanvas-start"
+          data-bs-backdrop="static"
+          tabindex="-1"
+          id="staticBackdrop"
+          aria-labelledby="staticBackdropLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="staticBackdropLabel">Offcanvas</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <div>I will not close if you click outside of me.</div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
 
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages%}
@@ -85,8 +119,8 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      type = "text/javascript";
-      src = "{{ url_for('static', filename='js/scripts.js') }}";
+      type = 'text/javascript'
+      src = "{{ url_for('static', filename='js/scripts.js') }}"
     </script>
   </body>
 </html>
