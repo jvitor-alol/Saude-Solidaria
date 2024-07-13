@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, login_user, current_user
+from flask_login import LoginManager, login_user, current_user, logout_user
 
 from .models import db, Usuario, Medico
 from .forms import RegistrationForm, LoginForm
@@ -60,7 +60,8 @@ def register():
 
 @auth.route('/logout')
 def logout():
-    return "<p>LOGOUT</p>"
+    logout_user()
+    return redirect(url_for('views.home'))
 
 
 def validar_usuario_medico(form: RegistrationForm) -> bool:
