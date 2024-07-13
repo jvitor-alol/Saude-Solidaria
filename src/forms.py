@@ -2,6 +2,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms import RadioField, BooleanField, SelectField
 from wtforms.validators import Length, DataRequired, Email, EqualTo, Optional
+from wtforms.validators import ValidationError
+
+from .models import Usuario, Medico
 
 
 class RegistrationForm(FlaskForm):
@@ -34,6 +37,23 @@ class RegistrationForm(FlaskForm):
             ('oncologia', 'Oncologia')
         ])
     submit = SubmitField('Registrar')
+
+    def validate_email(self, email: StringField) -> None:
+        user = Usuario.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError('Email já existe no sistema.')
+
+    def validate_nome_usuario(self, nome_usuario: StringField) -> None:
+        user = Usuario.query.filter_by(nome_usuario=nome_usuario.data).first()
+        if user:
+            raise ValidationError(
+                'Nome de usuário já utilizado. Por favor, escolha outro.')
+
+    def validate_crm(self, crm: StringField) -> None:
+        medico = Medico.query.filter_by(crm=crm.data).first()
+        if medico:
+            raise ValidationError(
+                'CRM já cadastrado no sistema. Verifique seus dados.')
 
 
 class LoginForm(FlaskForm):
