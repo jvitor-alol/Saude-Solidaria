@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask_bcrypt import Bcrypt
 
 from .models import db, Usuario, Medico
 from .forms import RegistrationForm, LoginForm
 
 auth = Blueprint('auth', __name__)
+bcrypt = Bcrypt()
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -12,7 +13,8 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = Usuario.query.filter_by(email=form.email.data).first()
-        if user and check_password_hash(user.senha, form.senha.data):
+        pwd = form.senha.data
+        if user and bcrypt.check_password_hash(user.senha, pwd):
             # TODO: Criar sessão de usuário
             flash("Login com sucesso.", "success")
             return redirect(url_for('views.home'))
@@ -59,7 +61,8 @@ def validar_usuario_medico(form: RegistrationForm) -> bool:
 
 
 def criar_usuario(form: RegistrationForm) -> Usuario:
-    hashed_password = generate_password_hash(form.senha.data)
+    hashed_password = bcrypt.generate_password_hash(
+        form.senha.data).decode('utf-8')
     new_user = Usuario(
         nome=form.nome.data,
         sobrenome=form.sobrenome.data,
