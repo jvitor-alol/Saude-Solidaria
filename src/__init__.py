@@ -4,7 +4,7 @@ from flask_wtf import CSRFProtect
 
 from config import configurations
 from .models import db, migrate
-from .auth import auth, bcrypt
+from .auth import auth, bcrypt, login_manager
 from .views import views
 
 bootstrap = Bootstrap5()
@@ -19,6 +19,7 @@ def create_app(config='default') -> Flask:
     csrf.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
+    login_manager.init_app(app)
     bcrypt.init_app(app)
     bootstrap.init_app(app)
 

@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import UserMixin
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -10,7 +11,7 @@ migrate = Migrate()
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
-class Usuario(db.Model):
+class Usuario(db.Model, UserMixin):
     __tablename__ = 'usuarios'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -82,7 +83,7 @@ class Medico(db.Model):
         db.Integer,
         db.ForeignKey('usuarios.id'),
         primary_key=True)
-    crm = db.Column(db.String(50), nullable=False)
+    crm = db.Column(db.String(50), unique=True, nullable=False)
     especialidade = db.Column(db.String(100), nullable=False)
 
     usuario = db.relationship(

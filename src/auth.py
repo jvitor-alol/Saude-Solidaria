@@ -1,22 +1,30 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager, login_user, current_user
 
 from .models import db, Usuario, Medico
 from .forms import RegistrationForm, LoginForm
 
 auth = Blueprint('auth', __name__)
 bcrypt = Bcrypt()
+login_manager = LoginManager()
+
+
+@login_manager.user_loader
+def load_user(user_id: int) -> Usuario:
+    return Usuario.query.get(user_id)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('views.home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = Usuario.query.filter_by(email=form.email.data).first()
-        pwd = form.senha.data
-        if user and bcrypt.check_password_hash(user.senha, pwd):
-            # TODO: Criar sessão de usuário
-            flash("Login com sucesso.", "success")
+        if user and bcrypt.check_password_hash(user.senha, form.senha.data):
+            login_user(user=user, remember=form.lembre_de_mim.data)
+            flash("Login com sucesso.", "success")  # Deletar linha depois
             return redirect(url_for('views.home'))
         else:
             flash("Login falhou. Verifique seu email e senha.", "danger")
@@ -25,8 +33,9 @@ def login():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('views.home'))
     form = RegistrationForm()
-
     if form.validate_on_submit():
         if not validar_usuario_medico(form):
             flash(
