@@ -1,6 +1,14 @@
 name: Pylint
 
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - 'migrations/**'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'migrations/**'
 
 jobs:
   build:
@@ -17,10 +25,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install -r requirements.txt
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py') > pylint-report.txt || true
+        pylint $(git ls-files '*.py' ':!:docs/**' ':!:tests/**' ':!:migrations/**') > pylint-report.txt || true
     - name: Upload Pylint Report
       uses: actions/upload-artifact@v3
       with:
@@ -29,6 +38,8 @@ jobs:
     - name: Comment on Pull Request
       if: github.event_name == 'pull_request'
       uses: actions/github-script@v6
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         script: |
           const fs = require('fs');
