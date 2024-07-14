@@ -1,12 +1,13 @@
 #!/usr/bin/env python
+import os
+
 from src import create_app, create_db
 
-
-def main() -> None:
-    app = create_app()
-    create_db(app)
-    app.run(debug=True)
+config_name = os.getenv('FLASK_CONFIG', 'default')
+app = create_app(config_name)
 
 
 if __name__ == '__main__':
-    main()
+    if config_name == 'development':
+        create_db(app)
+    app.run()
