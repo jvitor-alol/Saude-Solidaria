@@ -3,12 +3,16 @@ name: Pylint
 on:
   push:
     paths-ignore:
-      - 'docs/**'
-      - 'migrations/**'
+      - "docs/**"
+      - "discussions/**"
+      - "migrations/**"
+      - "tests/**"
   pull_request:
     paths-ignore:
-      - 'docs/**'
-      - 'migrations/**'
+      - "docs/**"
+      - "discussions/**"
+      - "migrations/**"
+      - "tests/**"
 
 jobs:
   build:
@@ -17,43 +21,48 @@ jobs:
       matrix:
         python-version: ["3.8", "3.9", "3.10"]
     steps:
-    - uses: actions/checkout@v4
-    - name: Cache Python packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install pylint
-    - name: Analysing the code with pylint
-      run: |
-        pylint $(git ls-files '*.py' ':!:docs/**' ':!:tests/**' ':!:migrations/**') > pylint-report.txt || true
-    - name: Upload Pylint Report
-      uses: actions/upload-artifact@v3
-      with:
-        name: pylint-report
-        path: pylint-report.txt
-    - name: Comment on pull request (Python 3.10 only)
-      if: matrix.python-version == '3.10' && github.event_name == 'pull_request'
-      uses: actions/github-script@v6
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        script: |
-          const fs = require('fs');
-          const report = fs.readFileSync('pylint-report.txt', 'utf8');
-          github.rest.issues.createComment({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            issue_number: context.issue.number,
-            body: `Pylint report for Python 3.10:\n\`\`\`\n${report}\n\`\`\``
-          });
+      - uses: actions/checkout@v4
+
+      - name: Cache Python packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-global-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-global-
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pylint
+
+      - name: Analyzing the code with pylint
+        run: |
+          pylint --rcfile=.pylintrc $(find . -type f -name "*.py") > pylint-report.txt || true
+
+      - name: Upload Pylint Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: pylint-report
+          path: pylint-report.txt
+
+      - name: Comment on pull request (Python 3.10 only)
+        if: matrix.python-version == '3.10' && github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('pylint-report.txt', 'utf8');
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `Pylint report for Python 3.10\n\n\`\`\`\n${report}\n\`\`\``
+            });

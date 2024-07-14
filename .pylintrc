@@ -1,0 +1,6 @@
+[MASTER]
+ignore=tests,migrations,docs,discussions
+output-format = text
+
+[REPORTS]
+output-format = text
