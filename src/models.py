@@ -9,6 +9,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+AVATAR_IMG_PATH = os.path.join(BASE_DIR, 'static/images/default_avatar.png')
 
 # Tabelas associativas (many-to-many)
 favoritos = db.Table(
@@ -139,7 +140,7 @@ class Usuario(db.Model, UserMixin):
     foto_perfil = db.Column(
         db.Text,
         nullable=False,
-        default=os.path.join(BASE_DIR, 'static/images/default_avatar.png'))
+        default=AVATAR_IMG_PATH)
     bio = db.Column(db.Text)
     data_registro = db.Column(
         db.DateTime(timezone=True),
@@ -182,6 +183,32 @@ class Usuario(db.Model, UserMixin):
         backref='reportado_por',
         lazy=True)
 
+    def __init__(
+            self, nome, sobrenome, nome_usuario, senha, email,
+            telefone=None, cidade=None, estado=None, pais='Brasil',
+            data_nascimento=None, genero=None, foto_perfil=AVATAR_IMG_PATH,
+            bio=None, data_registro=None, ultimo_login=None, status='ativo',
+            notificacoes=False, tipo_usuario='comum'):
+        self.nome = nome
+        self.sobrenome = sobrenome
+        self.nome_usuario = nome_usuario
+        self.senha = senha
+        self.email = email
+        self.telefone = telefone
+        self.cidade = cidade
+        self.estado = estado
+        self.pais = pais
+        self.data_nascimento = data_nascimento
+        self.genero = genero
+        self.foto_perfil = foto_perfil
+        self.bio = bio
+        self.data_registro = data_registro if data_registro else datetime.now(
+            timezone.utc)
+        self.ultimo_login = ultimo_login
+        self.status = status
+        self.notificacoes = notificacoes
+        self.tipo_usuario = tipo_usuario
+
     def __repr__(self) -> str:
         return f"Usuario({self.id=}, {self.nome_usuario=}, {self.email=})"
 
@@ -200,6 +227,11 @@ class Medico(db.Model):
     usuario = db.relationship(
         'Usuario',
         backref=db.backref('medico', uselist=False))
+
+    def __init__(self, usuario_id, crm, especialidade):
+        self.usuario_id = usuario_id
+        self.crm = crm
+        self.especialidade = especialidade
 
     def __repr__(self) -> str:
         return f"Medico({self.usuario_id=}, {self.crm=})"
@@ -232,6 +264,19 @@ class Post(db.Model):
         backref='posts',
         lazy=True)
 
+    def __init__(
+            self, titulo, conteudo, categoria, autor_id, media_estrelas=0,
+            num_votos=0, data_publicacao=None, ultima_atualizacao=None):
+        self.titulo = titulo
+        self.conteudo = conteudo
+        self.categoria = categoria
+        self.media_estrelas = media_estrelas
+        self.num_votos = num_votos
+        self.data_publicacao = data_publicacao if data_publicacao \
+            else datetime.now(timezone.utc)
+        self.ultima_atualizacao = ultima_atualizacao
+        self.autor_id = autor_id
+
     def __repr__(self) -> str:
         return f"Post({self.id=}, {self.titulo=}, {self.autor_id=})"
 
@@ -255,6 +300,19 @@ class Comentario(db.Model):
         nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
 
+    def __init__(
+            self, conteudo, autor_id, post_id, nota_geral=0, num_votos=0,
+            data_comentario=None, ultima_atualizacao=None, editado=False):
+        self.conteudo = conteudo
+        self.nota_geral = nota_geral
+        self.num_votos = num_votos
+        self.data_comentario = data_comentario if data_comentario \
+            else datetime.now(timezone.utc)
+        self.ultima_atualizacao = ultima_atualizacao
+        self.editado = editado
+        self.autor_id = autor_id
+        self.post_id = post_id
+
     def __repr__(self) -> str:
         return (f"Comentario({self.id=}, {self.autor_id=}, {self.post_id=})")
 
@@ -264,6 +322,9 @@ class Tag(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(50), nullable=False)
+
+    def __init__(self, nome):
+        self.nome = nome
 
     def __repr__(self) -> str:
         return f"Tag({self.id=}, {self.nome=})"
