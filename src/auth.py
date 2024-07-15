@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, current_user, logout_user
@@ -24,7 +26,8 @@ def login():
         user = Usuario.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.senha, form.senha.data):
             login_user(user=user, remember=form.lembre_de_mim.data)
-            # TODO: atualizar data e hora do ultimo login
+            user.ultimo_login = datetime.now(timezone.utc)
+            db.session.commit()
             flash("Login com sucesso.", "success")  # Deletar linha depois
             return redirect(url_for('views.home'))
         flash("Login falhou. Verifique seu email e senha.", "danger")
