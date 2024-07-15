@@ -27,7 +27,8 @@ favoritos = db.Table(
     db.Column(
         'data_adicao',
         db.DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc), nullable=False)
+        default=lambda: datetime.now(timezone.utc),
+        nullable=False)
 )
 
 ler_mais_tarde = db.Table(
@@ -45,7 +46,8 @@ ler_mais_tarde = db.Table(
     db.Column(
         'data_adicao',
         db.DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc), nullable=False)
+        default=lambda: datetime.now(timezone.utc),
+        nullable=False)
 )
 
 avaliacoes = db.Table(
@@ -64,7 +66,8 @@ avaliacoes = db.Table(
     db.Column(
         'data_adicao',
         db.DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc), nullable=False)
+        default=lambda: datetime.now(timezone.utc),
+        nullable=False)
 )
 
 posts_tags = db.Table(
@@ -98,7 +101,8 @@ reports_posts = db.Table(
     db.Column(
         'data_report',
         db.DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc), nullable=False)
+        default=lambda: datetime.now(timezone.utc),
+        nullable=False)
 )
 
 reports_comentarios = db.Table(
@@ -118,7 +122,8 @@ reports_comentarios = db.Table(
     db.Column(
         'data_report',
         db.DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc), nullable=False)
+        default=lambda: datetime.now(timezone.utc),
+        nullable=False)
 )
 
 
@@ -202,8 +207,8 @@ class Usuario(db.Model, UserMixin):
         self.genero = genero
         self.foto_perfil = foto_perfil
         self.bio = bio
-        self.data_registro = data_registro if data_registro else datetime.now(
-            timezone.utc)
+        self.data_registro = data_registro if data_registro \
+            else datetime.now(timezone.utc)
         self.ultimo_login = ultimo_login
         self.status = status
         self.notificacoes = notificacoes
