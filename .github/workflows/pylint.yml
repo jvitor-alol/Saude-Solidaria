@@ -44,7 +44,7 @@ jobs:
 
       - name: Analyzing the code with pylint
         run: |
-          pylint --rcfile=.pylintrc $(find . -type f -name "*.py") > pylint-report.txt || true
+          pylint --rcfile=.pylintrc $(find . -name "*.py" | grep -vE "tests|docs|migrations|discussions") > pylint-report.txt || true
 
       - name: Upload Pylint Report
         uses: actions/upload-artifact@v3

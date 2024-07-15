@@ -314,7 +314,7 @@ class Comentario(db.Model):
         self.post_id = post_id
 
     def __repr__(self) -> str:
-        return (f"Comentario({self.id=}, {self.autor_id=}, {self.post_id=})")
+        return f"Comentario({self.id=}, {self.autor_id=}, {self.post_id=})"
 
 
 class Tag(db.Model):

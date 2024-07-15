@@ -4,3 +4,6 @@ output-format = text
 
 [REPORTS]
 output-format = text
+
+[MESSAGES CONTROL]
+disable = R0902, R0913, R0914, R0903

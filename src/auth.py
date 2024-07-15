@@ -24,10 +24,10 @@ def login():
         user = Usuario.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.senha, form.senha.data):
             login_user(user=user, remember=form.lembre_de_mim.data)
+            # TODO: atualizar data e hora do ultimo login
             flash("Login com sucesso.", "success")  # Deletar linha depois
             return redirect(url_for('views.home'))
-        else:
-            flash("Login falhou. Verifique seu email e senha.", "danger")
+        flash("Login falhou. Verifique seu email e senha.", "danger")
     return render_template('login.html', title='Login', form=form)
 
 
