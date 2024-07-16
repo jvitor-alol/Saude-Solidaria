@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from flask import Blueprint, render_template, flash, redirect, url_for
+from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, current_user, logout_user
 
@@ -9,7 +9,11 @@ from .forms import RegistrationForm, LoginForm
 
 auth = Blueprint('auth', __name__)
 bcrypt = Bcrypt()
+
 login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+login_manager.login_message_category = 'info'
+login_manager.login_message = "Faça o login para acessar essa página."
 
 
 @login_manager.user_loader
@@ -28,8 +32,9 @@ def login():
             login_user(user=user, remember=form.lembre_de_mim.data)
             user.ultimo_login = datetime.now(timezone.utc)
             db.session.commit()
-            flash("Login com sucesso.", "success")  # Deletar linha depois
-            return redirect(url_for('views.home'))
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page \
+                else redirect(url_for('views.home'))
         flash("Login falhou. Verifique seu email e senha.", "danger")
     return render_template('login.html', title='Login', form=form)
 
