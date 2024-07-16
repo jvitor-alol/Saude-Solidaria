@@ -34,10 +34,10 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 USER appuser
 
 # Copy the source code into the container.
-COPY . .
+COPY src .
 
 # Expose the port that the application listens on.
 EXPOSE 8000
 
 # Run the application.
-CMD gunicorn 'app:app' --bind=0.0.0.0:8000 -w 4
+CMD gunicorn 'run:app' --bind=0.0.0.0:8000 -w 4

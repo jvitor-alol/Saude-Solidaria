@@ -1,3 +1,4 @@
+import os
 import logging
 from logging.handlers import RotatingFileHandler
 
@@ -5,7 +6,7 @@ from flask import Flask
 from flask_bootstrap import Bootstrap5
 from flask_wtf import CSRFProtect
 
-from config import configurations
+from .config import configurations
 from .models import db, migrate
 from .auth import auth, bcrypt, login_manager
 from .views import views
@@ -43,6 +44,8 @@ def create_db(app: Flask) -> None:
 
 
 def configure_logging(app: Flask) -> None:
+    if not os.path.exists('logs'):
+        os.makedirs('logs')
     file_handler = RotatingFileHandler(
         'logs/flask_app.log', maxBytes=10240, backupCount=10)
 
