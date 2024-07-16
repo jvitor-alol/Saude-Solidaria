@@ -1,4 +1,3 @@
-import os
 from datetime import datetime, timezone
 
 from flask_sqlalchemy import SQLAlchemy
@@ -8,8 +7,7 @@ from flask_login import UserMixin
 db = SQLAlchemy()
 migrate = Migrate()
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-AVATAR_IMG_PATH = os.path.join(BASE_DIR, 'static/images/default_avatar.png')
+AVATAR_IMG_PATH = 'static/images/default_avatar.png'
 
 # Tabelas associativas (many-to-many)
 favoritos = db.Table(
