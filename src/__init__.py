@@ -1,3 +1,6 @@
+import logging
+from logging.handlers import RotatingFileHandler
+
 from flask import Flask
 from flask_bootstrap import Bootstrap5
 from flask_wtf import CSRFProtect
@@ -28,7 +31,8 @@ def create_app(config='default') -> Flask:
     app.register_blueprint(auth, url_prefix='/auth')
 
     # Inicia o logger em prod
-    configure_logging(app)
+    if not app.debug:
+        configure_logging(app)
 
     return app
 
@@ -39,17 +43,18 @@ def create_db(app: Flask) -> None:
 
 
 def configure_logging(app: Flask) -> None:
-    import logging
-    from logging.handlers import RotatingFileHandler
+    file_handler = RotatingFileHandler(
+        'logs/flask_app.log', maxBytes=10240, backupCount=10)
 
-    if not app.debug:
-        file_handler = RotatingFileHandler(
-            'logs/flask_app.log', maxBytes=10240, backupCount=10)
-        file_handler.setFormatter(logging.Formatter(
-            '[%(asctime)s] %(levelname)s in %(module)s: %(message)s'
-        ))
-        file_handler.setLevel(logging.INFO)
-        app.logger.addHandler(file_handler)
+    # Formatter com informação de timezone
+    formatter = logging.Formatter(
+        '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+        datefmt='%Y/%m/%d %I:%M:%S %p %z'  # ISO 8601
+    )
+    file_handler.setFormatter(formatter)
 
-        app.logger.setLevel(logging.INFO)
-        app.logger.info('Flask App Startup')
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Flask App Startup')
