@@ -1,14 +1,11 @@
-from .setup import db, migrate
-from .comentario import Comentario
 from .usuario import Usuario
 from .medico import Medico
 from .post import Post
+from .comentario import Comentario
 from .tag import Tag
 
 
 __all__ = [
-    'db',
-    'migrate',
     'Usuario',
     'Medico',
     'Post',

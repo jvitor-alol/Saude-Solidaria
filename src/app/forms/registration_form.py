@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms import RadioField, BooleanField, SelectField
+from wtforms import RadioField, SelectField
 from wtforms.validators import Length, DataRequired, Email, EqualTo, Optional
 from wtforms.validators import ValidationError
 
-from .models import Usuario, Medico
+from ..models import Usuario, Medico
 
 
 class RegistrationForm(FlaskForm):
@@ -54,11 +54,3 @@ class RegistrationForm(FlaskForm):
         if medico:
             raise ValidationError(
                 "CRM já cadastrado no sistema. Verifique seus dados.")
-
-
-class LoginForm(FlaskForm):
-    email = StringField(
-        "Email", validators=[DataRequired(), Email()])
-    senha = PasswordField("Senha", validators=[DataRequired()])
-    lembre_de_mim = BooleanField("Mantenha-me conectado")
-    submit = SubmitField("Login")

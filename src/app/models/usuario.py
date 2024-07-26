@@ -2,9 +2,9 @@ from datetime import datetime, timezone
 
 from flask_login import UserMixin
 
-from .setup import db
 from .relacionamentos import avaliacoes, favoritos, ler_mais_tarde
 from .relacionamentos import reports_posts, reports_comentarios
+from ..extensions import db
 
 AVATAR_IMG_PATH = 'static/images/default_avatar.png'
 
