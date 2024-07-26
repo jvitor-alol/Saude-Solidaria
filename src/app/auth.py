@@ -25,6 +25,7 @@ def load_user(user_id: int) -> Usuario:
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('views.home'))
+
     form = LoginForm()
     if form.validate_on_submit():
         user = Usuario.query.filter_by(email=form.email.data).first()
@@ -35,7 +36,8 @@ def login():
             next_page = request.args.get('next')
             return redirect(next_page) if next_page \
                 else redirect(url_for('views.home'))
-        flash("Login falhou. Verifique seu email e senha.", "danger")
+        flash("Login falhou. Verifique seu email e senha.", 'danger')
+
     return render_template('login.html', title='Login', form=form)
 
 
@@ -43,11 +45,12 @@ def login():
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('views.home'))
+
     form = RegistrationForm()
     if form.validate_on_submit():
         if not validar_usuario_medico(form):
             flash(
-                'CRM e Especialidade são obrigatórios para médicos.', 'danger')
+                "CRM e Especialidade são obrigatórios para médicos.", 'danger')
             return render_template(
                 'register.html', title='Registrar', form=form)
 
@@ -59,8 +62,7 @@ def register():
             criar_medico(new_user.id, form)
 
         db.session.commit()
-
-        flash(f"Conta criada para {form.nome_usuario.data}.", "success")
+        flash(f"Conta criada para {form.nome_usuario.data}.", 'success')
         return redirect(url_for('views.home'))
 
     return render_template('register.html', title='Registrar', form=form)
@@ -79,8 +81,8 @@ def validar_usuario_medico(form: RegistrationForm) -> bool:
 
 
 def criar_usuario(form: RegistrationForm) -> Usuario:
-    hashed_password = bcrypt.generate_password_hash(
-        form.senha.data).decode('utf-8')
+    hashed_password = bcrypt.generate_password_hash(form.senha.data) \
+        .decode('utf-8')
     new_user = Usuario(
         nome=form.nome.data,
         sobrenome=form.sobrenome.data,
