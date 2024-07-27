@@ -18,3 +18,4 @@ def login_user_controller(form: LoginForm) -> Response:
         return redirect(next_page) if next_page \
             else redirect(url_for('views.home'))
     flash("Login falhou. Verifique seu email e senha.", 'danger')
+    return redirect(url_for('auth.login'))
