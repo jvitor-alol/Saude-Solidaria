@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from .setup import db
+from ..extensions import db
 
 # Tabelas associativas (many-to-many)
 favoritos = db.Table(

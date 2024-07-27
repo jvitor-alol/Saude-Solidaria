@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 
-from .setup import db
 from .relacionamentos import posts_tags
+from ..extensions import db
 
 
 class Post(db.Model):
