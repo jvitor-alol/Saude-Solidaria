@@ -143,3 +143,17 @@ nav {
     flex-flow: row;
     justify-content: space-evenly;
 }
+
+.alert {
+    position: relative;
+    z-index: 101;
+    margin: 1rem;
+}
+
+.flash-messages {
+    position: fixed;
+    top: var(--header-height);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
