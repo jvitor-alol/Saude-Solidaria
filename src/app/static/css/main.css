@@ -136,3 +136,10 @@ nav {
 .log-space {
     padding-bottom: 1rem;
 }
+
+#create-forgot {
+    padding-top: 1rem;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+}
