@@ -8,19 +8,22 @@ from ..models import Usuario, Medico
 
 
 class RegistrationForm(FlaskForm):
-    nome = StringField("Nome", validators=[DataRequired()])
-    sobrenome = StringField("Sobrenome", validators=[DataRequired()])
+    nome = StringField(
+        "Nome", validators=[DataRequired(), Length(max=255)])
+    sobrenome = StringField(
+        "Sobrenome", validators=[DataRequired(), Length(max=255)])
     nome_usuario = StringField(
         "Nome de usuário", validators=[DataRequired(), Length(min=4, max=100)])
     email = StringField(
-        "Email", validators=[DataRequired(), Email()])
+        "Email", validators=[DataRequired(), Email(), Length(max=255)])
     senha = PasswordField(
-        "Senha", validators=[DataRequired(), Length(min=8, max=100)])
+        "Senha", validators=[DataRequired(), Length(min=8, max=128)])
     confirmar_senha = PasswordField(
-        "Confirme a senha", validators=[DataRequired(), EqualTo("senha")])
+        "Confirme a senha",
+        validators=[DataRequired(), EqualTo("senha"), Length(min=8, max=128)])
     tipo_usuario = RadioField(
         "Conta", validators=[DataRequired()],
-        choices=[("comum", "Comum"), ("medico", "Médico")], )
+        choices=[("comum", "Comum"), ("medico", "Médico")])
     crm = StringField("CRM", validators=[Optional(), Length(max=50)])
     especialidade = SelectField(
         "Especialidade", validators=[Optional()],
