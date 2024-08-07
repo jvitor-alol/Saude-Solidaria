@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user, login_required
 
+from ..forms import RegistrationForm, UpdateAccountForm
 from ..controllers import register_user_controller
-from ..forms import RegistrationForm
+from ..controllers.helpers import get_medico
 
 
 views = Blueprint('views', __name__)
@@ -26,7 +27,13 @@ def register():
     return render_template('register.html', title='Registrar', form=form)
 
 
-@views.route('/account')
+@views.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
-    return render_template('account.html', title='Conta')
+    form = UpdateAccountForm()
+    medico_crm = get_medico().crm
+    if form.validate_on_submit():
+        # TODO: Tratar os dados
+        pass
+    return render_template(
+        'account.html', title='Conta', form=form, crm=medico_crm)

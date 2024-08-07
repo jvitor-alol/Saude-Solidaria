@@ -1,3 +1,38 @@
 #login-box {
     padding: 10% 30%;
 }
+
+.account-img {
+    border: 2px solid #444;
+    padding: 5px;
+    margin-right: 20px;
+}
+
+.account-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.content-section {
+    background-color: #343a40;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.media {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 25%;
+}
+
+.media-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
