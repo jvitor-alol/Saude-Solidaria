@@ -18,8 +18,8 @@ class UpdateAccountForm(FlaskForm):
         "Email", validators=[Email(), Length(max=255)])
     telefone = TelField(
         "Telefone", validators=[Length(min=10, max=15)])
-    cidade = StringField("Cidade", validators=[Length(100)])
-    estado = StringField("Estado", validators=[Length(100)])
+    cidade = StringField("Cidade", validators=[Length(max=100)])
+    estado = StringField("Estado", validators=[Length(max=100)])
     pais = SelectField("País", choices=[])
     data_nascimento = DateField("Data de nascimento")
     genero = SelectField(
