@@ -7,7 +7,7 @@ from ..extensions import db
 from ..forms import RegistrationForm
 
 
-def register_user_controller(form: RegistrationForm) -> Union[Response, str]:
+def register_user(form: RegistrationForm) -> Union[Response, str]:
     if not validar_usuario_medico(form):
         flash(
             "CRM e Especialidade são obrigatórios para médicos.", 'danger')
