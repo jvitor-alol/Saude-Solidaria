@@ -1,3 +1,5 @@
+import pycountry
+
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, BooleanField
 from wtforms import DateField, TelField, TextAreaField
@@ -20,7 +22,11 @@ class UpdateAccountForm(FlaskForm):
         "Telefone", validators=[Length(min=10, max=15)])
     cidade = StringField("Cidade", validators=[Length(max=100)])
     estado = StringField("Estado", validators=[Length(max=100)])
-    pais = SelectField("País", choices=[])
+    pais = SelectField(
+        "País",
+        choices=[
+            (country.alpha_2, country.name) for country in pycountry.countries
+        ])
     data_nascimento = DateField("Data de nascimento")
     genero = SelectField(
         "Gênero",
