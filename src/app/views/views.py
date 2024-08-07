@@ -31,9 +31,10 @@ def register():
 @login_required
 def account():
     form = UpdateAccountForm()
-    medico_crm = get_medico().crm
+    medico = get_medico()
     if form.validate_on_submit():
         # TODO: Tratar os dados
         pass
     return render_template(
-        'account.html', title='Conta', form=form, crm=medico_crm)
+        'account.html',
+        title='Conta', form=form, crm=medico.crm if medico else None)

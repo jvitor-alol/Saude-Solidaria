@@ -40,4 +40,4 @@ def test_account(logged_in_client):
     response = logged_in_client.get('/account')
     assert '<title>Saúde + Solidária • Conta</title>' in response.data \
         .decode('utf-8')
-    assert b'<p>Bem vindo(a) Test User</p>' in response.data
+    assert b'Bem-vindo(a), Test User' in response.data
