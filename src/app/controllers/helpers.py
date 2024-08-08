@@ -1,3 +1,7 @@
+import re
+
+from flask_login import current_user
+
 from ..models import Usuario, Medico
 from ..forms import RegistrationForm
 from ..extensions import login_manager, bcrypt, db
@@ -36,3 +40,14 @@ def criar_medico(usuario_id: int, form: RegistrationForm) -> None:
         especialidade=form.especialidade.data
     )
     db.session.add(new_medico)
+
+
+def get_medico() -> Medico:
+    if current_user.tipo_usuario == 'medico':
+        return current_user.medico
+    return None
+
+
+def normalizar_telefone(telefone: str) -> str:
+    telefone_normalizado = re.sub(r'[^\d+]', '', telefone)
+    return telefone_normalizado

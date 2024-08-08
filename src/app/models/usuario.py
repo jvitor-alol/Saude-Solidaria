@@ -18,7 +18,7 @@ class Usuario(db.Model, UserMixin):
     nome_usuario = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
-    telefone = db.Column(db.String(20))
+    telefone = db.Column(db.String(20), unique=True)
     cidade = db.Column(db.String(100))
     estado = db.Column(db.String(100))
     pais = db.Column(db.String(100), default='Brasil')

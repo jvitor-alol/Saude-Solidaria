@@ -1,5 +1,171 @@
 {% extends "base.html" %} {% block content %}
-<h1>CONTA</h1>
-<img src="{{ current_user.foto_perfil }}" height="200px" />
-<p>Bem vindo(a) {{ current_user.nome }} {{ current_user.sobrenome }}</p>
+<div class="container" style="margin-top: 100px">
+  <div class="content-section">
+    <h1 style="text-align: center; margin-bottom: 2rem">
+      Bem-vindo(a), {{ current_user.nome }} {{ current_user.sobrenome }}
+    </h1>
+    <div class="media">
+      <div class="media-avatar">
+        <img
+          class="rounded-circle account-img"
+          src="{{ current_user.foto_perfil }}"
+          width="200px"
+        />
+      </div>
+      <div class="media-body">
+        <h2 class="account-heading">{{ current_user.nome_usuario }}</h2>
+        <p class="text-secondary">{{ current_user.email }}</p>
+        {% if current_user.tipo_usuario == 'medico' %}
+        <p class="text-secondary">CRM: {{ crm }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <!-- FORM -->
+    <h3 style="margin: 2rem 0">Atualizar dados</h3>
+    <hr />
+    <form method="POST" action="" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      <div class="mb-3">
+        {{ form.nome.label }} {{ form.nome(class_="form-control bg-dark
+        text-light") }} {% if form.nome.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.nome.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        {{ form.sobrenome.label }} {{ form.sobrenome(class_="form-control
+        bg-dark text-light") }} {% if form.sobrenome.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.sobrenome.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        {{ form.nome_usuario.label }} {{ form.nome_usuario(class_="form-control
+        bg-dark text-light") }} {% if form.nome_usuario.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.nome_usuario.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        {{ form.email.label }} {{ form.email(class_="form-control bg-dark
+        text-light") }} {% if form.email.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.email.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        {{ form.telefone.label }} {{ form.telefone(class_="form-control bg-dark
+        text-light") }} {% if form.telefone.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.telefone.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        {{ form.cidade.label }} {{ form.cidade(class_="form-control bg-dark
+        text-light") }} {% if form.cidade.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.cidade.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        {{ form.estado.label }} {{ form.estado(class_="form-control bg-dark
+        text-light") }} {% if form.estado.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.estado.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        {{ form.pais.label }} {{ form.pais(class_="form-control bg-dark
+        text-light") }} {% if form.pais.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.pais.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        {{ form.data_nascimento.label }} {{
+        form.data_nascimento(class_="form-control bg-dark text-light") }} {% if
+        form.data_nascimento.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.data_nascimento.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        {{ form.genero.label }} {{ form.genero(class_="form-control bg-dark
+        text-light") }} {% if form.genero.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.genero.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        {{ form.bio.label }} {{ form.bio(class_="form-control bg-dark
+        text-light") }} {% if form.bio.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.bio.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% if current_user.tipo_usuario == 'medico' %}
+      <div class="mb-3">
+        {{ form.especialidade.label }} {{
+        form.especialidade(class_="form-control bg-dark text-light") }} {% if
+        form.especialidade.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.especialidade.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+      <div class="mb-3">
+        {{ form.notificacoes.label }} {{
+        form.notificacoes(class_="form-check-input") }}
+      </div>
+      <div class="mb-3">
+        {{ form.foto_perfil.label() }} {{
+        form.foto_perfil(class_="form-control-file") }} {% if
+        form.foto_perfil.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.foto_perfil.errors %}
+          <span class="text-danger">{{ error }}</span><br />
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div>{{ form.submit(class_="btn btn-success") }}</div>
+    </form>
+  </div>
+</div>
 {% endblock content %}
