@@ -1,12 +1,13 @@
 from flask import flash, redirect, url_for, Response
 from flask_login import current_user
 
-from ..forms import UpdateAccountForm
 from ..extensions import db
+from ..forms import UpdateAccountForm
+from ..controllers import salvar_imagem_temporario
 from ..controllers.helpers import normalizar_telefone
 
 
-def update_user(form: UpdateAccountForm, foto_perfil: str = None) -> Response:
+def update_user(form: UpdateAccountForm) -> Response:
     current_user.nome = form.nome.data
     current_user.sobrenome = form.sobrenome.data
     current_user.nome_usuario = form.nome_usuario.data
@@ -20,8 +21,9 @@ def update_user(form: UpdateAccountForm, foto_perfil: str = None) -> Response:
     current_user.bio = form.bio.data
     current_user.notificacoes = form.notificacoes.data
 
-    if foto_perfil:
-        current_user.foto_perfil = foto_perfil
+    if form.foto_perfil.data:
+        path_foto_perfil = salvar_imagem_temporario(form.foto_perfil.data)
+        current_user.foto_perfil = path_foto_perfil
 
     if current_user.tipo_usuario == 'medico':
         current_user.medico.especialidade = form.especialidade.data
