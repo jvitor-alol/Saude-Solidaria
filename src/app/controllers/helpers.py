@@ -42,12 +42,12 @@ def criar_medico(usuario_id: int, form: RegistrationForm) -> None:
     db.session.add(new_medico)
 
 
-def get_medico():
+def get_medico() -> Medico:
     if current_user.tipo_usuario == 'medico':
         return current_user.medico
     return None
 
 
-def normalizar_telefone(phone_number: str) -> str:
-    normal_phone_number = re.sub(r'[^\d+]', '', phone_number)
-    return normal_phone_number
+def normalizar_telefone(telefone: str) -> str:
+    telefone_normalizado = re.sub(r'[^\d+]', '', telefone)
+    return telefone_normalizado
