@@ -23,7 +23,7 @@
     <!-- FORM -->
     <h3 style="margin: 2rem 0">Atualizar dados</h3>
     <hr />
-    <form method="POST" action="">
+    <form method="POST" action="" enctype="multipart/form-data">
       {{ form.hidden_tag() }}
       <div class="mb-3">
         {{ form.nome.label }} {{ form.nome(class_="form-control bg-dark
@@ -152,6 +152,17 @@
       <div class="mb-3">
         {{ form.notificacoes.label }} {{
         form.notificacoes(class_="form-check-input") }}
+      </div>
+      <div class="mb-3">
+        {{ form.foto_perfil.label() }} {{
+        form.foto_perfil(class_="form-control-file") }} {% if
+        form.foto_perfil.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.foto_perfil.errors %}
+          <span class="text-danger">{{ error }}</span><br />
+          {% endfor %}
+        </div>
+        {% endif %}
       </div>
       <div>{{ form.submit(class_="btn btn-success") }}</div>
     </form>

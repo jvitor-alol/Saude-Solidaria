@@ -2,9 +2,11 @@ import re
 
 import pycountry
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileAllowed, FileField
 from wtforms import StringField, SubmitField, SelectField, BooleanField
 from wtforms import DateField, TelField, TextAreaField
-from wtforms.validators import Length, Email, Optional, ValidationError
+from wtforms.validators import Length, Email, Optional, DataRequired
+from wtforms.validators import ValidationError
 from flask_login import current_user
 
 from ..models import Usuario
@@ -12,13 +14,13 @@ from ..models import Usuario
 
 class UpdateAccountForm(FlaskForm):
     nome = StringField(
-        "Nome", validators=[Length(max=255)])
+        "Nome", validators=[DataRequired(), Length(max=255)])
     sobrenome = StringField(
-        "Sobrenome", validators=[Length(max=255)])
+        "Sobrenome", validators=[DataRequired(), Length(max=255)])
     nome_usuario = StringField(
-        "Nome de usuário", validators=[Length(min=4, max=100)])
+        "Nome de usuário", validators=[DataRequired(), Length(min=4, max=100)])
     email = StringField(
-        "Email", validators=[Email(), Length(max=255)])
+        "Email", validators=[DataRequired(), Email(), Length(max=255)])
     telefone = TelField(
         "Telefone", validators=[Length(min=10, max=20)])
     cidade = StringField("Cidade", validators=[Length(max=100)])
@@ -54,6 +56,8 @@ class UpdateAccountForm(FlaskForm):
             ("psiquiatria", "Psiquiatria"),
             ("oncologia", "Oncologia")
         ])
+    foto_perfil = FileField(
+        "Atualizar foto de perfil", validators=[FileAllowed(['jpg', 'png'])])
     notificacoes = BooleanField("Deseja receber notificações?")
     submit = SubmitField("Salvar Alterações")
 
