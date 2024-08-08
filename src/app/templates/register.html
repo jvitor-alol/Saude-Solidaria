@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% from 'bootstrap5/form.html' import render_form %}
 {% block content %}
-<div class="container" style="margin-top: 100px">
+<div class="container content">
   <form method="POST" action="{{ url_for('views.register') }}">
     {{ render_form(form) }}
   </form>
