@@ -22,15 +22,15 @@ class UpdateAccountForm(FlaskForm):
     email = StringField(
         "Email", validators=[DataRequired(), Email(), Length(max=255)])
     telefone = TelField(
-        "Telefone", validators=[Length(min=10, max=20)])
-    cidade = StringField("Cidade", validators=[Length(max=100)])
-    estado = StringField("Estado", validators=[Length(max=100)])
+        "Telefone", validators=[Optional(), Length(min=10, max=20)])
+    cidade = StringField("Cidade", validators=[Optional(), Length(max=100)])
+    estado = StringField("Estado", validators=[Optional(), Length(max=100)])
     pais = SelectField(
         "País",
         choices=[
             (country.alpha_2, country.name) for country in pycountry.countries
         ])
-    data_nascimento = DateField("Data de nascimento")
+    data_nascimento = DateField("Data de nascimento", validators=[Optional()])
     genero = SelectField(
         "Gênero",
         choices=[
@@ -41,7 +41,7 @@ class UpdateAccountForm(FlaskForm):
             ("n/a", "Prefiro não informar")
         ],
         default="")
-    bio = TextAreaField("Bio")
+    bio = TextAreaField("Bio", validators=[Optional()])
     especialidade = SelectField(  # Para médicos
         "Especialidade", validators=[Optional()],
         choices=[
@@ -57,7 +57,8 @@ class UpdateAccountForm(FlaskForm):
             ("oncologia", "Oncologia")
         ])
     foto_perfil = FileField(
-        "Atualizar foto de perfil", validators=[FileAllowed(['jpg', 'png'])])
+        "Atualizar foto de perfil",
+        validators=[Optional(), FileAllowed(['jpg', 'png', 'jpeg'])])
     notificacoes = BooleanField("Deseja receber notificações?")
     submit = SubmitField("Salvar Alterações")
 
