@@ -1,5 +1,4 @@
 from flask_login import current_user
-from sqlalchemy.orm import joinedload
 
 from ..models import Usuario, Medico
 from ..forms import RegistrationForm
@@ -43,9 +42,5 @@ def criar_medico(usuario_id: int, form: RegistrationForm) -> None:
 
 def get_medico():
     if current_user.tipo_usuario == 'medico':
-        medico = Medico.query \
-            .options(joinedload(Medico.usuario)) \
-            .filter_by(usuario_id=current_user.id).first()
-        if medico:
-            return medico
+        return current_user.medico
     return None
