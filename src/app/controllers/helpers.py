@@ -1,3 +1,5 @@
+import re
+
 from flask_login import current_user
 
 from ..models import Usuario, Medico
@@ -44,3 +46,8 @@ def get_medico():
     if current_user.tipo_usuario == 'medico':
         return current_user.medico
     return None
+
+
+def normalizar_telefone(phone_number: str) -> str:
+    normal_phone_number = re.sub(r'[^\d+]', '', phone_number)
+    return normal_phone_number

@@ -3,6 +3,7 @@ from flask_login import current_user
 
 from ..forms import UpdateAccountForm
 from ..extensions import db
+from ..controllers.helpers import normalizar_telefone
 
 
 def update_user(form: UpdateAccountForm) -> Response:
@@ -10,7 +11,7 @@ def update_user(form: UpdateAccountForm) -> Response:
     current_user.sobrenome = form.sobrenome.data
     current_user.nome_usuario = form.nome_usuario.data
     current_user.email = form.email.data
-    current_user.telefone = form.telefone.data
+    current_user.telefone = normalizar_telefone(form.telefone.data)
     current_user.cidade = form.cidade.data
     current_user.estado = form.estado.data
     current_user.pais = form.pais.data

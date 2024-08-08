@@ -1,5 +1,6 @@
-import pycountry
+import re
 
+import pycountry
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, BooleanField
 from wtforms import DateField, TelField, TextAreaField
@@ -19,7 +20,7 @@ class UpdateAccountForm(FlaskForm):
     email = StringField(
         "Email", validators=[Email(), Length(max=255)])
     telefone = TelField(
-        "Telefone", validators=[Length(min=10, max=15)])
+        "Telefone", validators=[Length(min=10, max=20)])
     cidade = StringField("Cidade", validators=[Length(max=100)])
     estado = StringField("Estado", validators=[Length(max=100)])
     pais = SelectField(
@@ -56,6 +57,13 @@ class UpdateAccountForm(FlaskForm):
     notificacoes = BooleanField("Deseja receber notificações?")
     submit = SubmitField("Salvar Alterações")
 
+    def validate_nome_usuario(self, nome_usuario: StringField) -> None:
+        if nome_usuario.data == current_user.nome_usuario:
+            return
+        user = Usuario.query.filter_by(nome_usuario=nome_usuario.data).first()
+        if user:
+            raise ValidationError("Nome de usuário já utilizado.")
+
     def validate_email(self, email: StringField) -> None:
         if email.data == current_user.email:
             return
@@ -63,9 +71,21 @@ class UpdateAccountForm(FlaskForm):
         if user:
             raise ValidationError("Esse email já está sendo utilizado.")
 
-    def validate_nome_usuario(self, nome_usuario: StringField) -> None:
-        if nome_usuario.data == current_user.nome_usuario:
+    def validate_telefone(self, telefone: TelField) -> None:
+        # pylint: disable=C0415
+        from ..controllers.helpers import normalizar_telefone
+
+        telefone_normal = normalizar_telefone(telefone.data)
+
+        # Número válido
+        telefone_re = re.compile(r'^\+\d{1,4}\d{10,15}$')
+        if not telefone_re.match(telefone_normal):
+            raise ValidationError(
+                "Número de telefone inválido (exemplo: +55 (11) 99999-9999).")
+
+        if telefone_normal == normalizar_telefone(current_user.telefone):
             return
-        user = Usuario.query.filter_by(nome_usuario=nome_usuario.data).first()
+        # Check de telefone único
+        user = Usuario.query.filter_by(telefone=telefone_normal).first()
         if user:
-            raise ValidationError("Nome de usuário já utilizado.")
+            raise ValidationError("Telefone já está sendo utilizado.")
