@@ -6,7 +6,7 @@ from ..extensions import db
 from ..controllers.helpers import normalizar_telefone
 
 
-def update_user(form: UpdateAccountForm) -> Response:
+def update_user(form: UpdateAccountForm, foto_perfil: str = None) -> Response:
     current_user.nome = form.nome.data
     current_user.sobrenome = form.sobrenome.data
     current_user.nome_usuario = form.nome_usuario.data
@@ -19,6 +19,10 @@ def update_user(form: UpdateAccountForm) -> Response:
     current_user.genero = form.genero.data
     current_user.bio = form.bio.data
     current_user.notificacoes = form.notificacoes.data
+
+    if foto_perfil:
+        current_user.foto_perfil = foto_perfil
+
     if current_user.tipo_usuario == 'medico':
         current_user.medico.especialidade = form.especialidade.data
 

@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 
 from ..forms import RegistrationForm, UpdateAccountForm
 from ..controllers import register_user, update_user, get_user_data
+from ..controllers import salvar_imagem_temporario
 from ..controllers.helpers import get_medico
 
 
@@ -33,7 +34,9 @@ def account():
     form = UpdateAccountForm()
     medico = get_medico()
     if form.validate_on_submit():
-        update_user(form=form)
+        if form.foto_perfil.data:
+            picture_filename = salvar_imagem_temporario(form.foto_perfil.data)
+        update_user(form=form, foto_perfil=picture_filename)
     elif request.method == 'GET':
         get_user_data(form=form)
     return render_template(
