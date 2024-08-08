@@ -36,7 +36,9 @@ def account():
     if form.validate_on_submit():
         if form.foto_perfil.data:
             picture_filename = salvar_imagem_temporario(form.foto_perfil.data)
-        update_user(form=form, foto_perfil=picture_filename)
+            update_user(form=form, foto_perfil=picture_filename)
+        else:
+            update_user(form=form)
     elif request.method == 'GET':
         get_user_data(form=form)
     return render_template(
