@@ -4,8 +4,9 @@ import json
 def test_register_user(client, app):
     # Exemplo de teste simples para garantir que o ambiente de teste está configurado
     assert 1 == 1
+    
 
-def test_upload_image(client, logged_in_client):
+def test_upload_image(logged_in_client):
     # Teste para fazer upload de uma imagem
     image_path = os.path.join(os.path.dirname(__file__), '..', 'app', 'static', 'images', 'image.png')
     assert os.path.exists(image_path), f"Image not found at {image_path}"
