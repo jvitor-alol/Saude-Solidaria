@@ -41,7 +41,11 @@
           >
             <img
               class="menu-icon"
+              {%if current_user.is_authenticated%}
+              src="{{current_user.foto_perfil}}"
+              {%else%}
               src="{{ url_for('static', filename='images/icons/user.png') }}"
+              {%endif%}
               alt="usuário"
             />
           </button>
