@@ -14,6 +14,41 @@ Este projeto foi desenvolvido como parte da disciplina Projeto Integrador IV: De
 
 </div>
 
+## Dependências
+
+- [Docker](https://docs.docker.com/guides/getting-started/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+## Configurando o ambiente
+
+- Clone o repositório
+- Crie um arquivo .env na raíz do repositório com as seguintes variáveis de ambiente configuradas (modifique usuários, senhas e chaves de acordo):
+
+  ```env
+  FLASK_APP=run.py
+  FLASK_CONFIG=production
+  SECRET_KEY=<flask-secret-key>
+  POSTGRES_USER=flask_app
+  POSTGRES_PASSWORD=<super-secret-password>
+  POSTGRES_HOST=db
+  POSTGRES_PORT=5432
+  POSTGRES_DB=saude_solidaria
+  DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+  PGADMIN_DEFAULT_EMAIL=<admin@pgadmin.com>
+  PGADMIN_DEFAULT_PASSWORD=<password>
+  TZ=America/Sao_Paulo
+  ```
+
+## Executando a aplicação
+
+Dentro de `/deploy` execute o Docker Compose com
+
+```bash
+docker compose up -d
+```
+
+Acesse o web GUI a partir da porta mapeada no host em `http://localhost:8888/`.
+
 ## Colaboradores
 
 <div align="center">
