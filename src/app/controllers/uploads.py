@@ -22,7 +22,7 @@ def salvar_imagem_temporario(form_picture: Any) -> str:
         os.mkdir(TEMP_IMAGES_DIR_ABS)
 
     # Redimensiona a imagem antes de salvar
-    tamanho_max = (200, 200)
+    tamanho_max = (500, 500)
     imagem = Image.open(form_picture)
     imagem.thumbnail(tamanho_max)
     imagem.save(temp_file_path)
