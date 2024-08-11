@@ -5,6 +5,7 @@ from app.models import Usuario
 from app.extensions import db, bcrypt
 
 
+# Fixture para criar e configurar o app
 @pytest.fixture(scope='module')
 def app():
     app = create_app(config='testing')
@@ -15,11 +16,13 @@ def app():
     yield app
 
 
+# Fixture para o cliente de teste
 @pytest.fixture(scope='module')
 def client(app):
     return app.test_client()
 
 
+# Fixture para configurar e limpar o banco de dados
 @pytest.fixture(scope='function', autouse=True)
 def setup_db(app):
     with app.app_context():
@@ -29,6 +32,7 @@ def setup_db(app):
         db.drop_all()
 
 
+# Fixture para usuário autenticado
 @pytest.fixture
 def logged_in_client(client, app):
     with app.app_context():
