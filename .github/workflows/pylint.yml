@@ -1,0 +1,67 @@
+name: Python Linter
+
+on:
+  push:
+    branches: ["main"]
+    paths-ignore:
+      - "docs/**"
+      - "discussions/**"
+      - "migrations/**"
+  pull_request:
+    paths-ignore:
+      - "docs/**"
+      - "discussions/**"
+      - "migrations/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Python packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pylint pytest-json-report
+
+      - name: Analyzing the code with pylint
+        run: |
+          pylint --rcfile=.pylintrc $(find . -name "*.py" | grep -vE "tests|docs|migrations|discussions") > pylint-report-${{ matrix.python-version }}.txt || true
+
+      - name: Upload Pylint Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pylint-report-${{ matrix.python-version }}
+          path: pylint-report-${{ matrix.python-version }}.txt
+
+      - name: Comment on pull request
+        if: matrix.python-version == '3.10' && github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('pylint-report-${{ matrix.python-version }}.txt', 'utf8');
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## Pylint report\n\n\`\`\`\n${report}\n\`\`\``
+            });
