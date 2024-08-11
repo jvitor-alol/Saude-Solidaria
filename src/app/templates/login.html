@@ -1,45 +1,46 @@
 {% extends "base.html" %} {% block content %}
-<div id="login-box">
-  <form class="form-signin w-100 m-auto" method="POST" action="">
-    {{ form.hidden_tag() }}
-    <img
-      class="mb-4"
-      src="{{ url_for('static', filename='images/temp_logo.png') }}"
-      alt="Logo Temporário"
-      height="57"
-    />
-    <h1 class="h3 mb-3 fw-normal">Faça o login</h1>
-
-    <div class="form-floating mb-3">
-      {{ form.email(class="form-control", id="floatingInput",
-      placeholder="nome@exemplo.com") }} {{ form.email.label(class="form-label",
-      for="floatingInput") }} {% if form.email.errors %}
-      <div class="invalid-feedback d-block">
-        {% for error in form.email.errors %}
-        <span>{{ error }}</span>
-        {% endfor %}
+<main class="form-signin w-100">
+  <div class="login">
+    <form method="POST" action="">
+      {{ form.hidden_tag() }}
+      <h1 class="h3 mb-3 fw-normal">Login</h1>
+      <!-- Campo email -->
+      <div class="form-floating my-3">
+        {{ form.email(class="form-control", id="floatingInput",
+        placeholder="nome@exemplo.com") }} {{
+        form.email.label(class="form-label", for="floatingInput") }} {% if
+        form.email.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.email.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
       </div>
-      {% endif %}
-    </div>
-
-    <div class="form-floating mb-3">
-      {{ form.senha(class="form-control", id="floatingPassword",
-      placeholder="Senha") }} {{ form.senha.label(class="form-label",
-      for="floatingPassword") }} {% if form.senha.errors %}
-      <div class="invalid-feedback d-block">
-        {% for error in form.senha.errors %}
-        <span>{{ error }}</span>
-        {% endfor %}
+      <!-- Campo de senha -->
+      <div class="form-floating my-3">
+        {{ form.senha(class="form-control", id="floatingPassword",
+        placeholder="Senha") }} {{ form.senha.label(class="form-label",
+        for="floatingPassword") }} {% if form.senha.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in form.senha.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
       </div>
-      {% endif %}
-    </div>
-
-    <div class="form-check text-start my-3">
-      {{ form.lembre_de_mim(class="form-check-input", id="flexCheckDefault") }}
-      {{ form.lembre_de_mim.label(class="form-check-label",
-      for="flexCheckDefault") }}
-    </div>
-    {{ form.submit(class="btn btn-primary w-100 py-2") }}
-  </form>
-</div>
+      <!-- Lembre de mim -->
+      <div class="form-check text-start my-3">
+        {{ form.lembre_de_mim(class="form-check-input", id="flexCheckDefault")
+        }} {{ form.lembre_de_mim.label(class="form-check-label",
+        for="flexCheckDefault") }}
+      </div>
+      {{ form.submit(class="btn btn-primary w-100 py-2") }}
+      <div id="create-forgot">
+        <a href="{{ url_for('views.register') }}"> Criar conta </a>
+        <a href="#">Esqueceu a senha?</a>
+      </div>
+    </form>
+  </div>
+</main>
 {% endblock content %}
