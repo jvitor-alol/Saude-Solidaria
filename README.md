@@ -29,6 +29,7 @@ Este projeto foi desenvolvido como parte da disciplina Projeto Integrador IV: De
   FLASK_CONFIG=production
   SECRET_KEY=<flask-secret-key>
   POSTGRES_USER=flask_app
+  PGUSER=${POSTGRES_USER}
   POSTGRES_PASSWORD=<super-secret-password>
   POSTGRES_HOST=db
   POSTGRES_PORT=5432
