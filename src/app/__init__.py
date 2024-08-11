@@ -6,7 +6,7 @@ from flask import Flask
 
 from .config import configurations
 from .extensions import db, init_extensions
-from .views import views, auth
+from .routes import views, auth
 
 
 def create_app(config='default') -> Flask:
