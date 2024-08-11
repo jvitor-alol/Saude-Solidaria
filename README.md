@@ -50,6 +50,10 @@ docker compose up -d
 
 Acesse o web GUI a partir da porta mapeada no host em `http://localhost:8888/`.
 
+## Banco de dados
+
+![MER](./docs/assets/MER.png)
+
 ## Colaboradores
 
 <div align="center">
