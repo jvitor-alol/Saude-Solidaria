@@ -49,5 +49,6 @@ def get_medico() -> Medico:
 
 
 def normalizar_telefone(telefone: str) -> str:
+    telefone = str(telefone)  # Força o cast para evitar TypeErrors
     telefone_normalizado = re.sub(r'[^\d+]', '', telefone)
     return telefone_normalizado
