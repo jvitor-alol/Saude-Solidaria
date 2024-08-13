@@ -12,13 +12,20 @@ def update_user(form: UpdateAccountForm) -> Response:
     current_user.sobrenome = form.sobrenome.data
     current_user.nome_usuario = form.nome_usuario.data
     current_user.email = form.email.data
-    current_user.telefone = normalizar_telefone(form.telefone.data)
-    current_user.cidade = form.cidade.data
-    current_user.estado = form.estado.data
-    current_user.pais = form.pais.data
-    current_user.data_nascimento = form.data_nascimento.data
-    current_user.genero = form.genero.data
-    current_user.bio = form.bio.data
+    if form.telefone.data:
+        current_user.telefone = normalizar_telefone(form.telefone.data)
+    if form.cidade.data:
+        current_user.cidade = form.cidade.data
+    if form.estado.data:
+        current_user.estado = form.estado.data
+    if form.pais.data:
+        current_user.pais = form.pais.data
+    if form.data_nascimento.data:
+        current_user.data_nascimento = form.data_nascimento.data
+    if form.genero.data:
+        current_user.genero = form.genero.data
+    if form.bio.data:
+        current_user.bio = form.bio.data
     current_user.notificacoes = form.notificacoes.data
 
     if form.foto_perfil.data:
