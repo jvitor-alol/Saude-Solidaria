@@ -3,17 +3,15 @@ name: Python Linter
 on:
   push:
     branches: ["main"]
-    paths:
-      - "src/**"
     paths-ignore:
       - "src/migrations/**"
       - "src/tests/**"
+      - "docs/**"
   pull_request:
-    paths:
-      - "src/**"
     paths-ignore:
       - "src/migrations/**"
       - "src/tests/**"
+      - "docs/**"
 
 jobs:
   build:

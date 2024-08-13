@@ -7,6 +7,7 @@ from .relacionamentos import reports_posts, reports_comentarios
 from ..extensions import db
 
 AVATAR_IMG_PATH = 'static/images/default_avatar.png'
+PAIS_DEFAULT = 'BR'
 
 
 class Usuario(db.Model, UserMixin):
@@ -21,7 +22,7 @@ class Usuario(db.Model, UserMixin):
     telefone = db.Column(db.String(20), unique=True)
     cidade = db.Column(db.String(100))
     estado = db.Column(db.String(100))
-    pais = db.Column(db.String(100), default='Brasil')
+    pais = db.Column(db.String(100), default=PAIS_DEFAULT)
     data_nascimento = db.Column(db.Date)
     genero = db.Column(db.String(20))
     foto_perfil = db.Column(
@@ -72,7 +73,7 @@ class Usuario(db.Model, UserMixin):
 
     def __init__(
             self, nome, sobrenome, nome_usuario, senha, email,
-            telefone=None, cidade=None, estado=None, pais='Brasil',
+            telefone=None, cidade=None, estado=None, pais=PAIS_DEFAULT,
             data_nascimento=None, genero=None, foto_perfil=AVATAR_IMG_PATH,
             bio=None, data_registro=None, ultimo_login=None, status='ativo',
             notificacoes=False, tipo_usuario='comum'):
