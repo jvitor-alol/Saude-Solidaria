@@ -2,130 +2,178 @@
 <div class="container">
   <!-- Banner ou Jumbotron -->
   <div class="jumbotron text-center">
-    <img
-      src="{{ url_for('static', filename='images/logo_temp.png') }}"
-      alt="Logo"
-      class="img-fluid"
-      style="max-width: 200px"
-    />
     <h1>Bem-vindo ao Saúde + Solidária</h1>
     <p>Seu portal de notícias e informações sobre saúde</p>
   </div>
 
-  <!-- Seção de Apresentação da Equipe -->
+  <!-- Seção de Carrossel de Notícias -->
+  <div
+    id="carouselExampleIndicators"
+    class="carousel slide"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="2"
+        aria-label="Slide 3"
+      ></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img
+          src="{{ url_for('static', filename='images/foto1.png') }}"
+          class="d-block w-100"
+          alt="..."
+        />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Notícia 1</h5>
+          <p>Resumo da notícia 1.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img
+          src="{{ url_for('static', filename='images/foto2.png') }}"
+          class="d-block w-100"
+          alt="..."
+        />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Notícia 2</h5>
+          <p>Resumo da notícia 2.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img
+          src="{{ url_for('static', filename='images/foto3.png') }}"
+          class="d-block w-100"
+          alt="..."
+        />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Notícia 3</h5>
+          <p>Resumo da notícia 3.</p>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Próximo</span>
+    </button>
+  </div>
+
+  <!-- Seção de Formulário de Criação de Post -->
+  <div class="my-4">
+    <h2>Criar Novo Post</h2>
+    <form method="post" action="">
+      <div class="mb-3">
+        <label for="postTitle" class="form-label">Título do Post</label>
+        <input
+          type="text"
+          class="form-control"
+          id="postTitle"
+          name="postTitle"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="postContent" class="form-label">Conteúdo do Post</label>
+        <textarea
+          class="form-control"
+          id="postContent"
+          name="postContent"
+          rows="3"
+          required
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="postImage" class="form-label">Imagem do Post</label>
+        <input
+          type="file"
+          class="form-control"
+          id="postImage"
+          name="postImage"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Criar Post</button>
+    </form>
+  </div>
+
+  <!-- Seção de Postagens Recentes -->
   <div class="row my-4">
-    <div class="col-md-12">
-      <h2>Equipe do Projeto</h2>
-      <div class="row">
-        <!-- Detalhes da equipe -->
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">João Vitor Alves de Oliveira</h5>
-              <p class="card-text">
-                Responsável pelo backend e integração com a API de saúde.
-              </p>
-            </div>
-          </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img
+          src="{{ url_for('static', filename='images/foto4.png') }}"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">Postagem 1</h5>
+          <p class="card-text">Descrição breve da postagem 1.</p>
+          <a href="#" class="btn btn-primary">Leia mais</a>
         </div>
-
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Rosicre Ferreira</h5>
-              <p class="card-text">
-                Ajudou nas Rotas, nos testes Unitários, uma pequena parte do
-                Backend e no Frontend.
-              </p>
-            </div>
-          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img
+          src="{{ url_for('static', filename='images/foto5.png') }}"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">Postagem 2</h5>
+          <p class="card-text">Descrição breve da postagem 2.</p>
+          <a href="#" class="btn btn-primary">Leia mais</a>
         </div>
-
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Ewellyn Rocio Paes de Almeida</h5>
-              <p class="card-text">
-                Responsável pelas telas funcionalidades CRUD.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Guilherme Santos Soares</h5>
-              <p class="card-text">
-                Responsável por uma parte do banco de tela inicial.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Milena Silva de Souza</h5>
-              <p class="card-text">Ajudou a Ewellyn com as telas.</p>
-            </div>
-          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img
+          src="{{ url_for('static', filename='images/foto6.png') }}"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">Postagem 3</h5>
+          <p class="card-text">Descrição breve da postagem 3.</p>
+          <a href="#" class="btn btn-primary">Leia mais</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Seção de Exemplo de CRUD -->
-  <div class="row my-4">
-    <div class="col-md-6">
-      <h2>Criar Nova Postagem</h2>
-      <form action="/create_post" method="POST">
-        <div class="mb-3">
-          <label for="title" class="form-label">Título</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            name="title"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="content" class="form-label">Conteúdo</label>
-          <textarea
-            class="form-control"
-            id="content"
-            name="content"
-            rows="3"
-            required
-          ></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Criar Postagem</button>
-      </form>
-    </div>
-
-    <div class="col-md-6">
-      <h2>Postagens Recentes</h2>
-      <ul class="list-group">
-        <li class="list-group-item">
-          <h5>Postagem 1</h5>
-          <p>Descrição breve da postagem 1.</p>
-          <a href="/edit_post/1" class="btn btn-secondary btn-sm">Editar</a>
-          <a href="/delete_post/1" class="btn btn-danger btn-sm">Excluir</a>
-        </li>
-        <li class="list-group-item">
-          <h5>Postagem 2</h5>
-          <p>Descrição breve da postagem 2.</p>
-          <a href="/edit_post/2" class="btn btn-secondary btn-sm">Editar</a>
-          <a href="/delete_post/2" class="btn btn-danger btn-sm">Excluir</a>
-        </li>
-        <!-- Adicione mais postagens conforme necessário -->
-      </ul>
-    </div>
-  </div>
-
   <!-- Seção de Notícias em Destaque -->
-  <div class="row my-4">
+  <div class="row">
     <div class="col-md-12">
       <h2>Destaques</h2>
       <div class="list-group">
@@ -142,23 +190,6 @@
           <p class="mb-1">Descrição breve da notícia em destaque 3.</p>
         </a>
       </div>
-    </div>
-  </div>
-
-  <!-- Seção Final de Agradecimento -->
-  <div class="row my-4">
-    <div class="col-md-12 text-center">
-      <h2>Obrigado!</h2>
-      <p>
-        Para mais informações, entre em contato com qualquer um dos integrantes
-        do projeto:
-      </p>
-      <p>ROSICRE FERREIRA - rosicreferreira@gmail.com</p>
-      <p>PEDRO HENRIQUE DA SILVA BRITO - email2@exemplo.com</p>
-      <p>EWELLYN ROCIO PAES DE ALMEIDA - email3@exemplo.com</p>
-      <p>GUILHERME SANTOS SOARES - email3@exemplo.com</p>
-      <p>MIRELA SILVA DE SOUZA - email3@exemplo.com</p>
-      <p>JOAO VITOR ALVES DE OLIVEIRA - email3@exemplo.com</p>
     </div>
   </div>
 </div>
