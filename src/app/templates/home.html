@@ -1,1 +1,165 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <!-- Banner ou Jumbotron -->
+  <div class="jumbotron text-center">
+    <img
+      src="{{ url_for('static', filename='images/logo_temp.png') }}"
+      alt="Logo"
+      class="img-fluid"
+      style="max-width: 200px"
+    />
+    <h1>Bem-vindo ao Saúde + Solidária</h1>
+    <p>Seu portal de notícias e informações sobre saúde</p>
+  </div>
+
+  <!-- Seção de Apresentação da Equipe -->
+  <div class="row my-4">
+    <div class="col-md-12">
+      <h2>Equipe do Projeto</h2>
+      <div class="row">
+        <!-- Detalhes da equipe -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">João Vitor Alves de Oliveira</h5>
+              <p class="card-text">
+                Responsável pelo backend e integração com a API de saúde.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Rosicre Ferreira</h5>
+              <p class="card-text">
+                Ajudou nas Rotas, nos testes Unitários, uma pequena parte do
+                Backend e no Frontend.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Ewellyn Rocio Paes de Almeida</h5>
+              <p class="card-text">
+                Responsável pelas telas funcionalidades CRUD.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Guilherme Santos Soares</h5>
+              <p class="card-text">
+                Responsável por uma parte do banco de tela inicial.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Milena Silva de Souza</h5>
+              <p class="card-text">Ajudou a Ewellyn com as telas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seção de Exemplo de CRUD -->
+  <div class="row my-4">
+    <div class="col-md-6">
+      <h2>Criar Nova Postagem</h2>
+      <form action="/create_post" method="POST">
+        <div class="mb-3">
+          <label for="title" class="form-label">Título</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="content" class="form-label">Conteúdo</label>
+          <textarea
+            class="form-control"
+            id="content"
+            name="content"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Criar Postagem</button>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <h2>Postagens Recentes</h2>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <h5>Postagem 1</h5>
+          <p>Descrição breve da postagem 1.</p>
+          <a href="/edit_post/1" class="btn btn-secondary btn-sm">Editar</a>
+          <a href="/delete_post/1" class="btn btn-danger btn-sm">Excluir</a>
+        </li>
+        <li class="list-group-item">
+          <h5>Postagem 2</h5>
+          <p>Descrição breve da postagem 2.</p>
+          <a href="/edit_post/2" class="btn btn-secondary btn-sm">Editar</a>
+          <a href="/delete_post/2" class="btn btn-danger btn-sm">Excluir</a>
+        </li>
+        <!-- Adicione mais postagens conforme necessário -->
+      </ul>
+    </div>
+  </div>
+
+  <!-- Seção de Notícias em Destaque -->
+  <div class="row my-4">
+    <div class="col-md-12">
+      <h2>Destaques</h2>
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action">
+          <h5 class="mb-1">Notícia em Destaque 1</h5>
+          <p class="mb-1">Descrição breve da notícia em destaque 1.</p>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+          <h5 class="mb-1">Notícia em Destaque 2</h5>
+          <p class="mb-1">Descrição breve da notícia em destaque 2.</p>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+          <h5 class="mb-1">Notícia em Destaque 3</h5>
+          <p class="mb-1">Descrição breve da notícia em destaque 3.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seção Final de Agradecimento -->
+  <div class="row my-4">
+    <div class="col-md-12 text-center">
+      <h2>Obrigado!</h2>
+      <p>
+        Para mais informações, entre em contato com qualquer um dos integrantes
+        do projeto:
+      </p>
+      <p>ROSICRE FERREIRA - rosicreferreira@gmail.com</p>
+      <p>PEDRO HENRIQUE DA SILVA BRITO - email2@exemplo.com</p>
+      <p>EWELLYN ROCIO PAES DE ALMEIDA - email3@exemplo.com</p>
+      <p>GUILHERME SANTOS SOARES - email3@exemplo.com</p>
+      <p>MIRELA SILVA DE SOUZA - email3@exemplo.com</p>
+      <p>JOAO VITOR ALVES DE OLIVEIRA - email3@exemplo.com</p>
+    </div>
+  </div>
+</div>
+{% endblock content %}
