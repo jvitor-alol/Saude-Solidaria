@@ -43,8 +43,10 @@ class Usuario(db.Model, UserMixin):
         nullable=False)
 
     # Relacionamentos
-    posts = db.relationship('Post', backref='autor', lazy=True)
-    comentarios = db.relationship('Comentario', backref='autor', lazy=True)
+    posts = db.relationship(
+        'Post', backref='autor', lazy=True, cascade='all, delete-orphan')
+    comentarios = db.relationship(
+        'Comentario', backref='autor', lazy=True, cascade='all, delete-orphan')
     posts_avaliados = db.relationship(
         'Post',
         secondary=avaliacoes,

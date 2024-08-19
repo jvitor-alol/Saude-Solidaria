@@ -17,6 +17,7 @@ def delete_user(user_id):
 
     if usuario.tipo_usuario == 'medico':
         db.session.delete(usuario.medico)
+        db.session.commit()
     db.session.delete(usuario)
     db.session.commit()
 
