@@ -9,8 +9,7 @@ from ..forms import RegistrationForm
 
 def register_user(form: RegistrationForm) -> Union[Response, str]:
     if not validar_usuario_medico(form):
-        flash(
-            "CRM e Especialidade são obrigatórios para médicos.", 'danger')
+        flash("CRM e Especialidade são obrigatórios para médicos.", 'danger')
         return render_template(
             'register.html', title='Registrar', form=form)
 

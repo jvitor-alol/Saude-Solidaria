@@ -1,1 +1,14 @@
 {% extends "base.html" %}
+{% block content %}
+<div class="container content">
+    <div class="post-block">
+        {% for post in postagens %}
+        <h2>{{ post.titulo }}</h2>
+        <img src="{{ post.autor.foto_perfil }}" />
+        <p>Publicado por <span style="color: aqua;">{{ post.autor.nome_usuario }}</span> em {{ post.data_formatada }}
+        </p>
+        {{ post.conteudo | safe }}
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

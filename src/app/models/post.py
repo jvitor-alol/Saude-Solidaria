@@ -24,7 +24,8 @@ class Post(db.Model):
         nullable=False)
 
     # Relacionamentos
-    comentarios = db.relationship('Comentario', backref='post', lazy=True)
+    comentarios = db.relationship(
+        'Comentario', backref='post', lazy=True, cascade='all, delete-orphan')
     tags = db.relationship(
         'Tag',
         secondary=posts_tags,

@@ -196,3 +196,59 @@ nav {
     flex-direction: column;
     justify-content: center;
 }
+
+/* Estilos temporários para a home */
+
+
+.post-block {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-block h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.post-block img {
+    width: 50px;
+    /* Define a largura da imagem */
+    height: 50px;
+    /* Define a altura da imagem */
+    border-radius: 50%;
+    /* Torna a imagem circular */
+    float: left;
+    /* Alinha a imagem à esquerda */
+    margin-right: 15px;
+    /* Adiciona um espaçamento à direita da imagem */
+    object-fit: cover;
+    /* Garante que a imagem se ajuste bem ao container */
+    max-width: 100%;
+    /* Impede que a imagem ultrapasse o tamanho do container */
+}
+
+
+.post-block p {
+    font-size: 14px;
+    color: #666;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.post-block p small {
+    display: block;
+    font-size: 12px;
+    color: #999;
+}
+
+.post-block .post-content {
+    clear: both;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
+}

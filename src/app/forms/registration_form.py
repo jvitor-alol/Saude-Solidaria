@@ -4,6 +4,7 @@ from wtforms import RadioField, SelectField
 from wtforms.validators import Length, DataRequired, Email, EqualTo, Optional
 from wtforms.validators import ValidationError
 
+from .helpers import ESPECIALIDADES
 from ..models import Usuario, Medico
 
 
@@ -27,18 +28,7 @@ class RegistrationForm(FlaskForm):
     crm = StringField("CRM", validators=[Optional(), Length(max=50)])
     especialidade = SelectField(
         "Especialidade", validators=[Optional()],
-        choices=[
-            ("clinica geral", "Clínica Geral / Medicina Interna"),
-            ("pediatria", "Pediatria"),
-            ("ginecologia", "Ginecologia"),
-            ("ortopedia", "Ortopedia"),
-            ("dermatologia", "Dermatologia"),
-            ("cardiologia", "Cardiologia"),
-            ("neurologia", "Neurologia"),
-            ("oftalmologia", "Oftalmologia"),
-            ("psiquiatria", "Psiquiatria"),
-            ("oncologia", "Oncologia")
-        ])
+        choices=ESPECIALIDADES)
     submit = SubmitField("Registrar")
 
     def validate_email(self, email: StringField) -> None:

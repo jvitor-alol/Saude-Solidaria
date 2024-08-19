@@ -15,6 +15,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    BABEL_DEFAULT_LOCALE = 'pt_BR'
+
     # TODO: Configurar server de emails para o app eventualmente
     # Configurações de email (exemplo usando SMTP do Gmail)
     # MAIL_SERVER = 'smtp.googlemail.com'

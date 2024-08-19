@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import current_user, login_required
+from flask_babel import format_datetime
 
+from ..models import Post
 from ..forms import RegistrationForm, UpdateAccountForm
 from ..controllers import register_user, update_user, get_user_data
 from ..controllers.helpers import get_medico
@@ -12,7 +14,14 @@ views = Blueprint('views', __name__)
 @views.route('/')
 @views.route('/home')
 def home():
-    return render_template('home.html')
+    postagens = Post.query.all()
+
+    # Formata a data para exibição
+    for post in postagens:
+        post.data_formatada = format_datetime(
+            post.data_publicacao, "EEEE, d 'de' MMMM 'de' yyyy")
+
+    return render_template('home.html', postagens=postagens)
 
 
 @views.route('/register', methods=['GET', 'POST'])

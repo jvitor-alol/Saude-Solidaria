@@ -9,6 +9,7 @@ from wtforms.validators import Length, Email, Optional, DataRequired
 from wtforms.validators import ValidationError
 from flask_login import current_user
 
+from .helpers import ESPECIALIDADES
 from ..models import Usuario
 
 
@@ -44,18 +45,7 @@ class UpdateAccountForm(FlaskForm):
     bio = TextAreaField("Bio", validators=[Optional()])
     especialidade = SelectField(  # Para médicos
         "Especialidade", validators=[Optional()],
-        choices=[
-            ("clinica geral", "Clínica Geral / Medicina Interna"),
-            ("pediatria", "Pediatria"),
-            ("ginecologia", "Ginecologia"),
-            ("ortopedia", "Ortopedia"),
-            ("dermatologia", "Dermatologia"),
-            ("cardiologia", "Cardiologia"),
-            ("neurologia", "Neurologia"),
-            ("oftalmologia", "Oftalmologia"),
-            ("psiquiatria", "Psiquiatria"),
-            ("oncologia", "Oncologia")
-        ])
+        choices=ESPECIALIDADES)
     foto_perfil = FileField(
         "Atualizar foto de perfil",
         validators=[Optional(), FileAllowed(['jpg', 'png', 'jpeg'])])

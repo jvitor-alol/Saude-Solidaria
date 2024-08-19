@@ -1,5 +1,6 @@
 alembic==1.13.2
 awscli==1.33.24
+babel==2.16.0
 bcrypt==4.1.3
 bleach==6.1.0
 blinker==1.8.2
@@ -15,7 +16,9 @@ docutils==0.16
 email_validator==2.2.0
 exceptiongroup==1.2.2
 Flask==3.0.3
+flask-babel==4.0.0
 Flask-Bcrypt==1.0.1
+Flask-CKEditor==1.0.0
 Flask-Login==0.6.3
 Flask-Migrate==4.0.7
 Flask-SQLAlchemy==3.1.1
@@ -41,6 +44,7 @@ pycountry==24.6.1
 pytest==8.2.2
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
+pytz==2024.1
 PyYAML==6.0.1
 requests==2.32.3
 rsa==4.7.2
