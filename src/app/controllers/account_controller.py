@@ -1,5 +1,6 @@
 from flask import flash, redirect, url_for, Response
 from flask_login import current_user
+from bleach import clean
 
 from ..extensions import db
 from ..forms import UpdateAccountForm
@@ -8,16 +9,16 @@ from ..controllers.helpers import normalizar_telefone
 
 
 def update_user(form: UpdateAccountForm) -> Response:
-    current_user.nome = form.nome.data
-    current_user.sobrenome = form.sobrenome.data
-    current_user.nome_usuario = form.nome_usuario.data
-    current_user.email = form.email.data
+    current_user.nome = clean(form.nome.data)
+    current_user.sobrenome = clean(form.sobrenome.data)
+    current_user.nome_usuario = clean(form.nome_usuario.data)
+    current_user.email = clean(form.email.data)
     if form.telefone.data:
         current_user.telefone = normalizar_telefone(form.telefone.data)
     if form.cidade.data:
-        current_user.cidade = form.cidade.data
+        current_user.cidade = clean(form.cidade.data)
     if form.estado.data:
-        current_user.estado = form.estado.data
+        current_user.estado = clean(form.estado.data)
     if form.pais.data:
         current_user.pais = form.pais.data
     if form.data_nascimento.data:
@@ -25,7 +26,7 @@ def update_user(form: UpdateAccountForm) -> Response:
     if form.genero.data:
         current_user.genero = form.genero.data
     if form.bio.data:
-        current_user.bio = form.bio.data
+        current_user.bio = clean(form.bio.data)
     current_user.notificacoes = form.notificacoes.data
 
     if form.foto_perfil.data:
