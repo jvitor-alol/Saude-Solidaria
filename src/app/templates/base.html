@@ -26,7 +26,7 @@
       <!-- Usuário -->
       <div class="dropdown">
         <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img class="menu-icon" {%if current_user.is_authenticated%} src="{{current_user.foto_perfil}}" {%else%}
+          <img class="menu-icon" {%if current_user.is_authenticated%} src="{{ current_user.foto_perfil }}" {%else%}
             src="{{ url_for('static', filename='images/icons/user.png') }}" {%endif%} alt="usuário" />
         </button>
         <ul class="dropdown-menu">
@@ -34,6 +34,11 @@
           <li>
             <a class="dropdown-item" href="{{ url_for('views.account') }}">Minha conta</a>
           </li>
+          {% if current_user.medico %}
+          <li>
+            <a class="dropdown-item" href="{{ url_for('posts.new_post') }}">Nova postagem</a>
+          </li>
+          {% endif %}
           <li>
             <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
           </li>
