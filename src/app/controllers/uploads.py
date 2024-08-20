@@ -2,12 +2,13 @@ import os
 import secrets
 from typing import Any
 
+from flask import url_for
 from PIL import Image
 
 from ..config import BASE_DIR
 
-TEMP_IMAGES_DIR = 'static/images/tmp'
-TEMP_IMAGES_DIR_ABS = os.path.join(BASE_DIR, TEMP_IMAGES_DIR)
+TEMP_IMAGES_DIR = 'images/tmp'
+TEMP_IMAGES_DIR_ABS = os.path.join(BASE_DIR, 'static', TEMP_IMAGES_DIR)
 
 
 def salvar_imagem_temporario(form_picture: Any) -> str:
@@ -16,7 +17,7 @@ def salvar_imagem_temporario(form_picture: Any) -> str:
 
     temp_file_name = os.path.join(
         TEMP_IMAGES_DIR, (random_hex + extensao_arquivo))
-    temp_file_path = os.path.join(BASE_DIR, temp_file_name)
+    temp_file_path = os.path.join(BASE_DIR, 'static', temp_file_name)
 
     if not os.path.exists(TEMP_IMAGES_DIR_ABS):
         os.mkdir(TEMP_IMAGES_DIR_ABS)
@@ -27,6 +28,6 @@ def salvar_imagem_temporario(form_picture: Any) -> str:
     imagem.thumbnail(tamanho_max)
     imagem.save(temp_file_path)
 
-    return temp_file_name
+    return url_for('static', filename=temp_file_name)
 
 # TODO: Criar a lógica de upload de imagens para o S3
