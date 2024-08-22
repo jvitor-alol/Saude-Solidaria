@@ -58,3 +58,13 @@ def generate_test_user() -> None:
     )
     db.session.add(user)
     db.session.commit()
+
+# fixture para a página de post
+@pytest.fixture
+def login(client):
+    def do_login(username, password):
+        return client.post('/login', data=dict(
+            username=username,
+            password=password
+        ), follow_redirects=True)
+    return do_login

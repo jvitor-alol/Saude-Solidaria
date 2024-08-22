@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import current_user, login_required
 from flask_babel import format_datetime
 
@@ -48,3 +48,18 @@ def account():
     return render_template(
         'account.html',
         title='Conta', form=form, crm=medico.crm if medico else None)
+
+# Rota para deletar um post
+@views.route('/delete_post/<int:post_id>', methods=['POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+
+    if post.author != current_user:
+        flash('Você não tem permissão para deletar este post.', 'danger')
+        return redirect(url_for('views.home'))
+
+    db.session.delete(post)
+    db.session.commit()
+    flash('Post deletado com sucesso!', 'success')
+    return redirect(url_for('views.home'))
