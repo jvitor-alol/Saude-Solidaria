@@ -1,63 +1,118 @@
 {% extends "base.html"%}
 {%block content  %}
     <main>
-        <section id="banner-principal">
-            <img src="destaque.jpg" alt="Imagem de Destaque">
-            <h1>Dicas de Saúde</h1>
-            <p>Melhore sua qualidade de vida com nossas dicas práticas e cientificamente comprovadas.</p>
-        </section>
-        <section id="destaques">
-            <h2>Como uma dieta balanceada pode transformar sua saúde</h2>
-            <p>Descubra os benefícios de uma alimentação saudável e balanceada.</p>
-            <h2>10 Exercícios para fazer em casa</h2>
-            <p>Mantenha-se em forma sem sair de casa com estas rotinas de exercícios fáceis.</p>
-        </section>
-        <section id="dicas-por-categoria">
-            <h2>Nutrição</h2>
-            <p>A importância dos vegetais na dieta diária</p>
-            <p>Receitas saudáveis para o café da manhã</p>
-            <h2>Exercícios Físicos</h2>
-            <p>Como começar uma rotina de exercícios</p>
-            <p>Benefícios da caminhada diária</p>
-            <h2>Saúde Mental</h2>
-            <p>Técnicas de mindfulness para reduzir o estresse</p>
-            <p>Como melhorar a qualidade do sono</p>
-            <h2>Prevenção e Cuidados</h2>
-            <p>Dicas para fortalecer o sistema imunológico</p>
-            <p>Importância da vacinação anual</p>
-            <h2>Estilo de Vida</h2>
-            <p>Hábitos saudáveis para um dia mais produtivo</p>
-            <p>A importância de hidratação adequada</p>
-        </section>
-        <section id="artigos-recentes">
-            <!-- Adicione seus artigos recentes aqui -->
-        </section>
-        <section id="videos">
-            <!-- Adicione seus vídeos aqui -->
-        </section>
-        <section id="newsletter">
-            <form>
-                <input type="email" placeholder="Seu email">
-                <button type="submit">Inscrever-se</button>
-            </form>
-        </section>
-    </main>
-    <footer>
-        <nav>
-            <ul>
-                <li><a href="#">Link Rápido 1</a></li>
-                <li><a href="#">Link Rápido 2</a></li>
-                <!-- Adicione mais links rápidos conforme necessário -->
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Saúde+Solidária</h1>
+            </div>
+            <ul class="menu">
+                <li><a href="#">Início</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Dicas de Saúde</a>
+                    <div class="dropdown-content">
+                        <a href="#">Alimentação Saudável</a>
+                        <a href="#">Exercícios</a>
+                        <a href="#">Importância dos Vegetais</a>
+                        <a href="#">Receitas Saudáveis</a>
+                        <a href="#">Rotina de Exercícios</a>
+                        <a href="#">Caminhadas Diárias</a>
+                        <a href="#">Imunidade</a>
+                        <a href="#">Vacinação Anual</a>
+                        <a href="#">Hidratação</a>
+                    </div>
+                </li>
+                <li><a href="#">Instituições de Caridade</a></li>
+                <li><a href="#">Vídeos</a></li>
+                <li><a href="#">Newsletter</a></li>
             </ul>
         </nav>
-        <div id="redes-sociais">
-            <!-- Adicione seus ícones de redes sociais aqui -->
+    </header>
+
+    <!-- Carrossel de Destaques -->
+    <section id="destaques">
+        <div id="carouselDestaques" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselDestaques" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselDestaques" data-slide-to="1"></li>
+                <li data-target="#carouselDestaques" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://via.placeholder.com/1920x500" class="d-block w-100" alt="Destaque 1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Destaque 1</h5>
+                        <p>Informações importantes sobre saúde.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/1920x500" class="d-block w-100" alt="Destaque 2">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Destaque 2</h5>
+                        <p>Dicas e práticas para uma vida saudável.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/1920x500" class="d-block w-100" alt="Destaque 3">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Destaque 3</h5>
+                        <p>Conheça as melhores instituições de saúde.</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselDestaques" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselDestaques" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Próximo</span>
+            </a>
         </div>
-        <div id="contato">
-            <!-- Adicione suas informações de contato aqui -->
-        </div>
-        <div id="creditos-politicas">
-            <!-- Adicione seus créditos e políticas aqui -->
-        </div>
+    </section>
+
+    <!-- Seção de Dicas de Saúde -->
+    <main>
+        <section class="highlight-section text-center">
+            <div class="container">
+                <h2>Dicas de Saúde</h2>
+                <div class="row">
+                    <article class="col-md-4">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="Dica 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Dica 1</h5>
+                                <p class="card-text">Mantenha uma alimentação balanceada para uma vida mais saudável.</p>
+                                <a href="#" class="btn btn-primary">Saiba Mais</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="col-md-4">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="Dica 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Dica 2</h5>
+                                <p class="card-text">Pratique exercícios regularmente para manter o corpo e a mente ativos.</p>
+                                <a href="#" class="btn btn-primary">Saiba Mais</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="col-md-4">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="Dica 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Dica 3</h5>
+                                <p class="card-text">Cuide da sua saúde mental, reservando momentos para relaxar.</p>
+                                <a href="#" class="btn btn-primary">Saiba Mais</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 Mãos Solidárias. Todos os direitos reservados.</p>
     </footer>
 {%endblock content  %}

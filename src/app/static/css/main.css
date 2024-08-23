@@ -47,10 +47,11 @@ html {
 }
 
 body {
-    font: 400 1rem var(--body-font);
-    color: var(--text-color);
-    background: var(--body-color);
-    -webkit-font-smoothing: antialiased;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
 .title {
@@ -85,7 +86,10 @@ body {
     top: 0;
     left: 0;
     z-index: 100;
-    background-color: var(--body-color);
+    background-color: #00796b;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
     width: 100%;
 }
 
@@ -191,4 +195,35 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #00796b;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-weight: normal;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Carrossel */
+.carousel-item img {
+    height: 500px;
+    object-fit: cover;
 }
