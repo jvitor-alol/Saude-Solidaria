@@ -19,7 +19,7 @@ def create_app(config='default') -> Flask:
     # Registro de Blueprints
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/auth')
-    app.register_blueprint(users, url_prefix='/users')
+    app.register_blueprint(users, url_prefix='/user')
     app.register_blueprint(posts, url_prefix='/post')
 
     # Inicia o logger em prod/testing
