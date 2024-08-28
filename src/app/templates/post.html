@@ -27,19 +27,41 @@
         <hr>
 
         {% for comentario in post.comentarios %}
-        <div>
+        <div id="comment-{{ comentario.id }}">
             <img src="{{ comentario.autor.foto_perfil }}" alt="{{ comentario.autor.nome_usuario }}">
             <h3>{{ comentario.autor.nome_usuario }}</h3>
-            <p>{{ comentario.conteudo | safe }}</p>
+            <p id="comment-content-{{ comentario.id }}">{{ comentario.conteudo | safe }}</p>
+
+            <!-- Formulário de edição oculto -->
+            <form id="edit-form-{{ comentario.id }}"
+                action="{{ url_for('comments.edit_comment', comment_id=comentario.id) }}" method="post"
+                style="display: none;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <textarea name="conteudo" class="form-control" maxlength="5000"
+                    required>{{ comentario.conteudo | safe }}</textarea>
+                {% for error in form.conteudo.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+
+                <button type="submit">Salvar</button>
+                <button type="button" onclick="hideEditForm('{{ comentario.id }}')">Cancelar</button>
+            </form>
+
+            {% if current_user == comentario.autor %}
+            <button type="button" onclick="showEditForm('{{ comentario.id }}')">✏️</button>
+
+            <form action="{{ url_for('comments.delete_comment', comment_id=comentario.id) }}" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="submit" value="🗑️"></input>
+            </form>
+            {% endif %}
+
         </div>
 
-        {% if current_user == comentario.autor %}
-        <form action="{{ url_for('comments.delete_comment', comment_id=comentario.id) }}" method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <input type="submit" value="🗑️"></input>
-        </form>
-        {% endif %}
+
         {% endfor %}
+
     </div>
 </div>
 
@@ -65,4 +87,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    function showEditForm(commentId) {
+        document.getElementById('edit-form-' + commentId).style.display = 'block';
+        document.getElementById('comment-content-' + commentId).style.display = 'none';
+    }
+
+    function hideEditForm(commentId) {
+        document.getElementById('edit-form-' + commentId).style.display = 'none';
+        document.getElementById('comment-content-' + commentId).style.display = 'block';
+    }
+</script>
 {% endblock content %}
