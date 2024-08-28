@@ -185,9 +185,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Confimar exclusão</h5>
+        <h5 class="modal-title" id="deleteModalLabel">Confirmar exclusão</h5>
       </div>
-      <div class="modal-body">Quer mesmo excluir sua conta? Esta ação é definitiva.</div>
+      <div class="modal-body">Deseja mesmo excluir sua conta? Esta ação é definitiva.<br>
+        {% if current_user.posts or current_user.comentarios %}
+        <span style="color: red;">Todas as suas postagens e comentários serão excluídos</span>
+        {% endif %}
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Voltar
