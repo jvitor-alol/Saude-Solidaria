@@ -21,7 +21,14 @@ def new_post():
         flash("Postagem criada com sucesso.", 'success')
         return redirect(url_for('views.home'))
 
-    return render_template('post.html', form=form)
+    return render_template('edit_post.html', form=form)
+
+
+@posts.route('/<int:post_id>', methods=['GET', 'POST'])
+def view_post(post_id):
+    post = Post.query.get_or_404(post_id)
+
+    return render_template('post.html', post=post)
 
 
 @posts.route('/<int:post_id>/delete', methods=['POST'])
