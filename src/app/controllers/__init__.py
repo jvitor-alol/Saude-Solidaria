@@ -3,6 +3,7 @@ from .register_controller import register_user
 from .uploads import salvar_imagem_temporario
 from .account_controller import update_user, get_user_data
 from .post_controller import new_post_controller
+from .comment_controller import new_comment_controller
 
 __all__ = [
     'login_user_controller',
@@ -11,4 +12,5 @@ __all__ = [
     'get_user_data',
     'salvar_imagem_temporario',
     'new_post_controller',
+    'new_comment_controller',
 ]

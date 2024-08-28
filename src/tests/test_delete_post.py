@@ -1,16 +1,25 @@
-def test_delete_post(client, login):
-    # Simulando o login
-    login('test_user', 'test_password')
-    
-    # Crie um post
-    client.post('/create_post', data=dict(
-        title='Post para Deletar',
-        content='Conteúdo'
-    ), follow_redirects=True)
+from app.models import Post
 
-    # Exclua o post criado
-    response = client.post('/delete_post/1', follow_redirects=True)
 
-    # Verifique se o post foi deletado com sucesso
+def test_delete_post(logged_in_md):
+    response = logged_in_md.post(
+        '/post/new',
+        data={
+            'titulo': 'Post para Deletar',
+            'categoria': 'clinica geral',
+            'conteudo': 'Lorem ipsum'
+        },
+        follow_redirects=True
+    )
+
+    post = Post.query.filter_by(titulo='Post para Deletar').first()
+
+    assert post is not None
+
+    # Exclui o post
+    response = logged_in_md.post(
+        f'/post/{post.id}/delete', follow_redirects=True)
+
     assert response.status_code == 200
+    assert b'Postagem deletada' in response.data
     assert b'Post para Deletar' not in response.data
