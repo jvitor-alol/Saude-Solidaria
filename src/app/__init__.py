@@ -6,7 +6,7 @@ from flask import Flask
 
 from .config import configurations
 from .extensions import db, init_extensions
-from .routes import views, auth, users, posts
+from .routes import views, auth, users, posts, comments
 
 
 def create_app(config='default') -> Flask:
@@ -19,8 +19,9 @@ def create_app(config='default') -> Flask:
     # Registro de Blueprints
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/auth')
-    app.register_blueprint(users, url_prefix='/users')
+    app.register_blueprint(users, url_prefix='/user')
     app.register_blueprint(posts, url_prefix='/post')
+    app.register_blueprint(comments, url_prefix='/comment')
 
     # Inicia o logger em prod/testing
     if not app.debug:

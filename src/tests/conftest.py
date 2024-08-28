@@ -32,7 +32,7 @@ def setup_db(app):
         db.drop_all()
 
 
-# Fixture para usuário autenticado
+# Fixture para usuário comum autenticado
 @pytest.fixture
 def logged_in_client(client, app):
     with app.app_context():
@@ -45,7 +45,20 @@ def logged_in_client(client, app):
     return client
 
 
-def generate_test_user() -> None:
+# Fixture para médico autenticado
+@pytest.fixture
+def logged_in_md(client, app):
+    with app.app_context():
+        generate_test_user(tipo_usuario='medico')
+
+        client.post('/auth/login', data={
+            'email': 'test@example.com',
+            'senha': 'password123'
+        }, follow_redirects=True)
+    return client
+
+
+def generate_test_user(tipo_usuario='comum') -> None:
     hashed_password = bcrypt.generate_password_hash('password123') \
         .decode('utf-8')
     user = Usuario(
@@ -54,17 +67,7 @@ def generate_test_user() -> None:
         nome_usuario='testuser',
         email='test@example.com',
         senha=hashed_password,
-        tipo_usuario='comum'
+        tipo_usuario=tipo_usuario
     )
     db.session.add(user)
     db.session.commit()
-
-# fixture para a página de post
-@pytest.fixture
-def login(client):
-    def do_login(username, password):
-        return client.post('/login', data=dict(
-            username=username,
-            password=password
-        ), follow_redirects=True)
-    return do_login
