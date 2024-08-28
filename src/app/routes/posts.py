@@ -3,8 +3,8 @@ from flask_login import current_user, login_required
 
 from ..extensions import db
 from ..models import Post
-from ..forms import PostForm
-from ..controllers import new_post_controller
+from ..forms import PostForm, CommentForm
+from ..controllers import new_post_controller, new_comment_controller
 
 posts = Blueprint('posts', __name__)
 
@@ -27,8 +27,17 @@ def new_post():
 @posts.route('/<int:post_id>', methods=['GET', 'POST'])
 def view_post(post_id):
     post = Post.query.get_or_404(post_id)
+    form = CommentForm()
 
-    return render_template('post.html', post=post)
+    if form.validate_on_submit():
+        if not current_user.is_authenticated:
+            flash('Você precisa estar logado para comentar.', 'warning')
+            return render_template('post.html', post=post, form=form)
+
+        new_comment_controller(form=form, post_id=post_id)
+        form.conteudo.data = ''  # Limpa o campo de texto
+
+    return render_template('post.html', post=post, form=form)
 
 
 @posts.route('/<int:post_id>/delete', methods=['POST'])

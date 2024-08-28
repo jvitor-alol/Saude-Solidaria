@@ -12,12 +12,33 @@
     {% endif %}
 
     <div class="post-block">
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+
+            {{ form.conteudo.label() }}
+            {{ form.conteudo(class_="form-control") }}
+            {% for error in form.conteudo.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+
+            {{ form.submit(class_="btn btn-primary") }}
+        </form>
+
+        <hr>
+
         {% for comentario in post.comentarios %}
         <div>
             <img src="{{ comentario.autor.foto_perfil }}" alt="{{ comentario.autor.nome_usuario }}">
             <h3>{{ comentario.autor.nome_usuario }}</h3>
             <p>{{ comentario.conteudo | safe }}</p>
         </div>
+
+        {% if current_user == comentario.autor %}
+        <form action="{{ url_for('comments.delete_comment', comment_id=comentario.id) }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="submit" value="🗑️"></input>
+        </form>
+        {% endif %}
         {% endfor %}
     </div>
 </div>
