@@ -115,16 +115,14 @@ Acesse o web GUI a partir da porta mapeada no host em `http://localhost:8888/`.
             <a href="https://github.com/mirelaads" target="_blank"><p>mirelaads</p></a>
         </td>
         <td style="padding: 20px; border: 1px solid #ddd; vertical-align: middle;">
-            <img src="https://avatars.githubusercontent.com/u/102329062?v=4" alt="medinaandre" style="display: block; margin: 0 auto; width: 100px; height: 100px;">
-            <a href="https://github.com/medinaandre" target="_blank"><p>medinaandre</p></a>
-        </td>
-        <td style="padding: 20px; border: 1px solid #ddd; vertical-align: middle;">
             <img src="https://avatars.githubusercontent.com/u/86894587?v=4" alt="dkexs" style="display: block; margin: 0 auto; width: 100px; height: 100px;">
             <a href="https://github.com/dkexs" target="_blank"><p>dkexs</p></a>
         </td>
         <td style="padding: 20px; border: 1px solid #ddd; vertical-align: middle;">
             <img src="https://avatars.githubusercontent.com/u/60987344?v=4" alt="PedroBrito22" style="display: block; margin: 0 auto; width: 100px; height: 100px;">
             <a href="https://github.com/PedroBrito22" target="_blank"><p>PedroBrito22</p></a>
+        </td>
+        <td style="padding: 20px; border: 1px solid #ddd; vertical-align: middle;">
         </td>
     </tr>
   </table>
