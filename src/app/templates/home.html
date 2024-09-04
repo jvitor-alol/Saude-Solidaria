@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container content">
+    {% for post in postagens %}
     <div class="post-block">
-        {% for post in postagens %}
         <a href="{{ url_for('posts.view_post', post_id=post.id) }}">
             <div>
                 <h2>{{ post.titulo }}</h2>
@@ -14,7 +14,7 @@
                 {{ post.conteudo | safe }}
             </div>
         </a>
-        {% endfor %}
     </div>
+    {% endfor %}
 </div>
 {% endblock content %}
