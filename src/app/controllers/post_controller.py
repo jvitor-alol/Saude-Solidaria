@@ -7,7 +7,7 @@ from ..models import Post
 from ..forms import PostForm
 
 
-def new_post_controller(form: PostForm) -> None:
+def new_post_controller(form: PostForm) -> Post:
     titulo = clean(form.titulo.data)
     categoria = form.categoria.data
     conteudo = cleanify(form.conteudo.data)
@@ -21,3 +21,5 @@ def new_post_controller(form: PostForm) -> None:
 
     db.session.add(nova_postagem)
     db.session.commit()
+
+    return nova_postagem
