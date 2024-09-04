@@ -1,8 +1,8 @@
 import pytest
 
 from app import create_app
-from app.models import Usuario
-from app.extensions import db, bcrypt
+from app.extensions import db
+from .utils import generate_test_user
 
 
 # Fixture para criar e configurar o app
@@ -33,7 +33,7 @@ def setup_db(app):
 
 
 # Fixture para usuário comum autenticado
-@pytest.fixture
+@pytest.fixture(scope='function')
 def logged_in_client(client, app):
     with app.app_context():
         generate_test_user()
@@ -46,7 +46,7 @@ def logged_in_client(client, app):
 
 
 # Fixture para médico autenticado
-@pytest.fixture
+@pytest.fixture(scope='function')
 def logged_in_md(client, app):
     with app.app_context():
         generate_test_user(tipo_usuario='medico')
@@ -56,18 +56,3 @@ def logged_in_md(client, app):
             'senha': 'password123'
         }, follow_redirects=True)
     return client
-
-
-def generate_test_user(tipo_usuario='comum') -> None:
-    hashed_password = bcrypt.generate_password_hash('password123') \
-        .decode('utf-8')
-    user = Usuario(
-        nome='Test',
-        sobrenome='User',
-        nome_usuario='testuser',
-        email='test@example.com',
-        senha=hashed_password,
-        tipo_usuario=tipo_usuario
-    )
-    db.session.add(user)
-    db.session.commit()

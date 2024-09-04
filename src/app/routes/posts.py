@@ -17,9 +17,9 @@ def new_post():
 
     form = PostForm()
     if form.validate_on_submit():
-        new_post_controller(form)
-        flash("Postagem criada com sucesso.", 'success')
-        return redirect(url_for('views.home'))
+        post = new_post_controller(form)
+        flash("Postagem criada.", 'success')
+        return redirect(url_for('posts.view_post', post_id=post.id))
 
     return render_template('edit_post.html', form=form)
 
