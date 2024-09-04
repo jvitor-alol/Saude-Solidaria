@@ -1,9 +1,10 @@
 import re
 
+from flask import abort
 from flask_login import current_user
 from bleach import clean
 
-from ..models import Usuario, Medico
+from ..models import Usuario, Medico, Post
 from ..forms import RegistrationForm
 from ..extensions import login_manager, bcrypt, db
 
@@ -53,3 +54,11 @@ def normalizar_telefone(telefone: str) -> str:
     telefone = str(telefone)  # Força o cast para evitar TypeErrors
     telefone_normalizado = re.sub(r'[^\d+]', '', telefone)
     return telefone_normalizado
+
+
+def validar_autor_post(post_id: int) -> Post:
+    post = Post.query.get_or_404(post_id)
+    if post.autor != current_user:
+        abort(403)
+
+    return post
