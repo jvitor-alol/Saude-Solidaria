@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container content">
-    <h2>{{ post.titulo }}</h2>
+    <h1>{{ post.titulo }}</h1>
     <div>
         {{ post.conteudo | safe }}
     </div>
     {% if current_user == post.autor %}
+    <a href="{{ url_for('posts.edit_post', post_id=post.id ) }}" class="btn btn-secondary mt-4">
+        Editar
+    </a>
     <button type="button" class="btn btn-danger mt-4" data-toggle="modal" data-target="#deleteModal">
-        Excluir postagem
+        Excluir
     </button>
     {% endif %}
 
@@ -26,6 +29,11 @@
 
         <hr>
 
+        {% if not post.comentarios %}
+        <div style="display: flex; justify-content: center;">
+            <h4>Seja o primeiro a comentar.</h4>
+        </div>
+        {% endif %}
         {% for comentario in post.comentarios %}
         <div id="comment-{{ comentario.id }}">
             <img src="{{ comentario.autor.foto_perfil }}" alt="{{ comentario.autor.nome_usuario }}">

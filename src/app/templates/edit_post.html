@@ -1,16 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container content">
-    <h2>Nova Postagem</h2>
+    <h1>{{ h1 }}</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
 
         {{ form.titulo(placeholder=form.titulo.description, class_="form-control") }}
+        {{ form.categoria.label() }}
         {{ form.categoria(class_="form-control") }}
         {{ form.conteudo() }}
 
         {{ form.submit(class_="form-control") }}
     </form>
+    <button type="button" class="btn btn-secondary mt-3" onclick="window.history.back();">Descartar</button>
 </div>
 
 
