@@ -2,6 +2,7 @@
 {% block content %}
 <div class="container content">
     <h1>{{ post.titulo }}</h1>
+    <img style="max-width: fit-content;" src="{{ post.foto_cover }}" alt="Imagem de capa">
     <div>
         {{ post.conteudo | safe }}
     </div>
