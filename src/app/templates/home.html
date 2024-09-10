@@ -2,6 +2,7 @@
 {% block content %}
 <div class="container content">
     <!-- Carrossel -->
+    {% if postagens %}
     <div id="carouselDestaques" class="carousel slide" data-ride="carousel" data-interval="3000">
         <ol class="carousel-indicators">
             <li data-target="#carouselDestaques" data-slide-to="0" class="active"></li>
@@ -27,6 +28,7 @@
             <span class="sr-only">Próximo</span>
         </a>
     </div>
+    {% endif %}
 
     {% for post in postagens %}
     <div class="post-block">
