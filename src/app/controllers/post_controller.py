@@ -7,6 +7,7 @@ from .helpers import validar_autor_post
 from ..extensions import db
 from ..models import Post
 from ..forms import PostForm
+from ..controllers import salvar_imagem_temporario
 
 ALLOWED_TAGS = [
     'a', 'abbr', 'b', 'blockquote', 'code',
@@ -27,6 +28,10 @@ def new_post_controller(form: PostForm) -> Post:
         autor_id=current_user.id
     )
 
+    if form.foto_cover.data:
+        cover = salvar_imagem_temporario(form.foto_cover.data, resize=False)
+        nova_postagem.foto_cover = cover
+
     db.session.add(nova_postagem)
     db.session.commit()
 
@@ -46,6 +51,10 @@ def edit_post_controller(post_id: int, form: PostForm) -> Response:
     post.titulo = clean(form.titulo.data)
     post.categoria = form.categoria.data
     post.conteudo = cleanify(form.conteudo.data, allow_tags=ALLOWED_TAGS)
+
+    if form.foto_cover.data:
+        cover = salvar_imagem_temporario(form.foto_cover.data, resize=False)
+        post.foto_cover = cover
 
     db.session.commit()
 

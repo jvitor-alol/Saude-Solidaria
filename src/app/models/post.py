@@ -3,6 +3,8 @@ from datetime import datetime, timezone
 from .relacionamentos import posts_tags
 from ..extensions import db
 
+DEFAULT_COVER_PATH = 'https://via.placeholder.com/1920x500'
+
 
 class Post(db.Model):
     __tablename__ = 'posts'
@@ -11,6 +13,10 @@ class Post(db.Model):
     titulo = db.Column(db.String(255), nullable=False)
     conteudo = db.Column(db.Text, nullable=False)
     categoria = db.Column(db.String(100), nullable=False)
+    foto_cover = db.Column(
+        db.Text,
+        nullable=False,
+        default=DEFAULT_COVER_PATH)
     media_estrelas = db.Column(db.Float, default=0)
     num_votos = db.Column(db.Integer, default=0)
     data_publicacao = db.Column(
@@ -39,10 +45,12 @@ class Post(db.Model):
 
     def __init__(
             self, titulo, conteudo, categoria, autor_id, media_estrelas=0,
-            num_votos=0, data_publicacao=None, ultima_atualizacao=None):
+            num_votos=0, data_publicacao=None, ultima_atualizacao=None,
+            foto_cover=DEFAULT_COVER_PATH):
         self.titulo = titulo
         self.conteudo = conteudo
         self.categoria = categoria
+        self.foto_cover = foto_cover
         self.media_estrelas = media_estrelas
         self.num_votos = num_votos
         self.data_publicacao = data_publicacao if data_publicacao \
