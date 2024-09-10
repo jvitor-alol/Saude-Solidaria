@@ -59,7 +59,9 @@
       </div>
 
       <!-- Logo -->
-      <a class="logo" href="{{ url_for('views.home') }}">logo</a>
+      <a class="logo" href="{{ url_for('views.home') }}">
+        <img src="{{ url_for('static', filename='images/icons/logo.png') }}" alt="logo">
+      </a>
 
       <!-- Menu -->
       <div class="toggle icon-menu">
@@ -71,7 +73,7 @@
       <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
         aria-labelledby="staticBackdropLabel">
         <div class="offcanvas-header">
-          <a class="logo" href="#">logo</a>
+          <a class="logo" href="#"><img src="{{ url_for('static', filename='images/icons/logo.png') }}" alt="logo"></a>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
