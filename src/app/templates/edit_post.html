@@ -2,12 +2,21 @@
 {% block content %}
 <div class="container content">
     <h1>{{ h1 }}</h1>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
 
         {{ form.titulo(placeholder=form.titulo.description, class_="form-control") }}
         {{ form.categoria.label() }}
         {{ form.categoria(class_="form-control") }}
+        {{ form.foto_cover.label() }}
+        {{ form.foto_cover(class_="form-control-file") }}
+        {% if form.foto_cover.errors %}
+        <div class="invalid-feedback d-block">
+            {% for error in form.foto_cover.errors %}
+            <span class="text-danger">{{ error }}</span><br />
+            {% endfor %}
+        </div>
+        {% endif %}
         {{ form.conteudo() }}
 
         {{ form.submit(class_="form-control") }}
