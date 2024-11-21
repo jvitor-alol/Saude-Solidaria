@@ -1,0 +1,89 @@
+{% extends "base.html" %} {% block content %}
+<div class="container my-5">
+  <div class="text-center mb-5">
+    <h1 class="display-4 font-weight-bold text-primary">
+      Informações: Campanha do Sono
+    </h1>
+    <p class="text-muted">
+      Entenda a ciência por trás do sono e sua importância para uma vida
+      saudável.
+    </p>
+  </div>
+
+  <section class="mb-5">
+    <h2 class="h4 text-success font-weight-bold mb-3">Por Que Dormimos?</h2>
+    <p>
+      O sono é uma função biológica vital. Ele permite ao corpo e à mente se
+      recuperarem, garantindo que você acorde renovado e alerta. Durante o sono,
+      o cérebro processa informações, consolida memórias e restaura o equilíbrio
+      químico.
+    </p>
+    <img
+      src="{{ url_for('static', filename='images/sono_importancia.png') }}"
+      alt="Imagem ilustrativa da importância do sono"
+      class="img-fluid rounded shadow-sm mt-3"
+    />
+  </section>
+
+  <section class="mb-5">
+    <h2 class="h4 text-danger font-weight-bold mb-3">Fases do Sono</h2>
+    <p>O ciclo do sono é dividido em duas fases principais:</p>
+    <ul class="list-group mb-3">
+      <li class="list-group-item">
+        <strong>REM (Rapid Eye Movement):</strong> associada a sonhos vívidos e
+        à consolidação de memórias.
+      </li>
+      <li class="list-group-item">
+        <strong>NREM (Non-REM):</strong> consiste em três estágios, sendo o
+        último o sono profundo, fundamental para a regeneração do corpo.
+      </li>
+    </ul>
+  </section>
+
+  <section class="mb-5">
+    <h2 class="h4 text-info font-weight-bold mb-3">Impacto do Sono na Saúde</h2>
+    <p>
+      Dormir bem é essencial para o equilíbrio emocional, desempenho cognitivo e
+      saúde física. A privação de sono está ligada a problemas como:
+    </p>
+    <ul class="list-group mb-3">
+      <li class="list-group-item">Redução da imunidade</li>
+      <li class="list-group-item">Aumento do risco de doenças cardíacas</li>
+      <li class="list-group-item">Problemas de memória e concentração</li>
+      <li class="list-group-item">
+        Alterações de humor, como ansiedade e depressão
+      </li>
+    </ul>
+  </section>
+
+  <section class="mb-5">
+    <h2 class="h4 text-primary font-weight-bold mb-3">
+      Curiosidades sobre o Sono
+    </h2>
+    <p>Sabia que:</p>
+    <ul class="list-group">
+      <li class="list-group-item">
+        Uma pessoa passa, em média, um terço da vida dormindo?
+      </li>
+      <li class="list-group-item">
+        A privação de sono afeta a capacidade de dirigir tanto quanto o consumo
+        de álcool?
+      </li>
+      <li class="list-group-item">
+        Dormir menos de 6 horas por noite pode aumentar o risco de obesidade?
+      </li>
+    </ul>
+  </section>
+
+  <div class="text-center">
+    <h2 class="h4 text-success font-weight-bold">
+      Pratique uma Boa Higiene do Sono!
+    </h2>
+    <p class="text-muted">
+      Reserve um horário fixo para dormir, crie um ambiente tranquilo e priorize
+      sua saúde.
+    </p>
+    <a href="/contato" class="btn btn-primary btn-lg">Fale Conosco</a>
+  </div>
+</div>
+{% endblock %}

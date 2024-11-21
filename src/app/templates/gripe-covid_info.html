@@ -1,0 +1,76 @@
+{% extends "base.html" %} {% block content %}
+<div class="container my-5">
+  <div class="text-center mb-5">
+    <h1 class="display-4 font-weight-bold text-primary">Gripe e COVID-19</h1>
+    <p class="text-muted">
+      Saiba mais sobre as doenças respiratórias mais comuns e como se proteger.
+    </p>
+  </div>
+
+  <section class="mb-5">
+    <h2 class="h4 text-success font-weight-bold mb-3">
+      O que são Doenças Respiratórias?
+    </h2>
+    <p>
+      Doenças respiratórias afetam o sistema respiratório, incluindo pulmões,
+      traqueia e vias aéreas. Entre as mais conhecidas estão a gripe e a
+      COVID-19, que podem variar de leves a graves e impactar a saúde de milhões
+      de pessoas ao redor do mundo.
+    </p>
+    <img
+      src="{{ url_for('static', filename='images/doencas_respiratorias.jpg') }}"
+      alt="Ilustração sobre doenças respiratórias"
+      class="img-fluid rounded shadow-sm mt-3"
+    />
+  </section>
+
+  <section class="mb-5">
+    <h2 class="h4 text-danger font-weight-bold mb-3">A COVID-19</h2>
+    <p>
+      A COVID-19 é causada pelo coronavírus SARS-CoV-2 e foi responsável por uma
+      pandemia global. Os sintomas podem variar de leves, como febre e cansaço,
+      até graves, como dificuldade de respirar e complicações pulmonares.
+    </p>
+    <ul class="list-group mb-3">
+      <li class="list-group-item">Febre, tosse e cansaço</li>
+      <li class="list-group-item">Perda de olfato ou paladar</li>
+      <li class="list-group-item">Dificuldade respiratória em casos graves</li>
+    </ul>
+    <p>
+      <strong>Formas de Prevenção:</strong>
+      Use máscaras, lave as mãos regularmente, pratique o distanciamento social
+      e vacine-se.
+    </p>
+  </section>
+
+  <section class="mb-5">
+    <h2 class="h4 text-info font-weight-bold mb-3">A Gripe</h2>
+    <p>
+      A gripe, causada pelo vírus Influenza, é uma doença respiratória comum e
+      altamente contagiosa. Seus surtos geralmente ocorrem em determinadas
+      épocas do ano.
+    </p>
+    <ul class="list-group mb-3">
+      <li class="list-group-item">Febre alta</li>
+      <li class="list-group-item">Dores musculares</li>
+      <li class="list-group-item">Tosse seca e cansaço</li>
+    </ul>
+    <p>
+      <strong>Prevenção:</strong> A vacina anual contra a gripe é altamente
+      recomendada, além de medidas de higiene e proteção, como lavar as mãos e
+      evitar contato com pessoas infectadas.
+    </p>
+  </section>
+
+  <div class="text-center">
+    <h2 class="h4 text-primary font-weight-bold">
+      Juntos contra as Doenças Respiratórias!
+    </h2>
+    <p class="text-muted">
+      A prevenção e a vacinação são fundamentais para salvar vidas e reduzir a
+      disseminação de doenças.
+    </p>
+    <a href="/contato" class="btn btn-primary btn-lg">Entre em Contato</a>
+  </div>
+</div>
+{% endblock %}

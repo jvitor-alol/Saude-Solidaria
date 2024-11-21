@@ -1,128 +1,249 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-  <!-- Link google fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/dengue.css') }}"
+    />
 
-  {% if title %}
-  <title>Saúde + Solidária • {{ title }}</title>
-  {% else %}
-  <title>Saúde + Solidária</title>
-  {% endif %}
-</head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/aids.css') }}"
+    />
 
-<body>
-  <header id="header" class="scroll">
-    <nav class="container">
-      <!-- Usuário -->
-      <div class="dropdown">
-        <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img class="menu-icon" {%if current_user.is_authenticated%} src="{{ current_user.foto_perfil }}" {%else%}
-            src="{{ url_for('static', filename='images/icons/user.png') }}" {%endif%} alt="usuário" />
-        </button>
-        <ul class="dropdown-menu">
-          {% if current_user.is_authenticated %}
-          <li>
-            <a class="dropdown-item" href="{{ url_for('views.account') }}">Minha conta</a>
-          </li>
-          {% if current_user.medico %}
-          <li>
-            <a class="dropdown-item" href="{{ url_for('posts.new_post') }}">Nova postagem</a>
-          </li>
-          {% endif %}
-          <li>
-            <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-          </li>
-          {% else %}
-          <li>
-            <a class="dropdown-item" href="{{ url_for('auth.login') }}">Login</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="{{ url_for('views.register') }}">Registrar</a>
-          </li>
-          {% endif %}
-          <li>
-            <button class="dropdown-item" type="button">
-              <img class="menu-icon" src="{{ url_for('static', filename='images/icons/help.png') }}" alt="ajuda" />
-            </button>
-          </li>
-        </ul>
-      </div>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/gripe-covid_info.css') }}"
+    />
 
-      <!-- Logo -->
-      <a class="logo" href="{{ url_for('views.home') }}">
-        <img src="{{ url_for('static', filename='images/icons/logo.png') }}" alt="logo">
-      </a>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/cancer_de_pele_info.css') }}"
+    />
 
-      <!-- Menu -->
-      <div class="toggle icon-menu">
-        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
-          aria-controls="staticBackdrop">
-          <img class="menu-icon" src="{{ url_for('static', filename='images/icons/menu.png') }}" alt="menu" />
-        </button>
-      </div>
-      <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
-        aria-labelledby="staticBackdropLabel">
-        <div class="offcanvas-header">
-          <a class="logo" href="#"><img src="{{ url_for('static', filename='images/icons/logo.png') }}" alt="logo"></a>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/campanha_do_sono_info.css') }}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/historico.css') }}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <!-- Link google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    {% if title %}
+    <title>Saúde + Solidária • {{ title }}</title>
+    {% else %}
+    <title>Saúde + Solidária</title>
+    {% endif %}
+  </head>
+
+  <body>
+    <header id="header" class="scroll">
+      <nav class="container">
+        <!-- Usuário -->
+        <div class="dropdown">
+          <button
+            class="btn"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              class="menu-icon"
+              {%if
+              current_user.is_authenticated%}
+              src="{{ current_user.foto_perfil }}"
+              {%else%}
+              src="{{ url_for('static', filename='images/icons/user.png') }}"
+              {%endif%}
+              alt="usuário"
+            />
+          </button>
+          <ul class="dropdown-menu">
+            {% if current_user.is_authenticated %}
+            <li>
+              <a class="dropdown-item" href="{{ url_for('views.account') }}"
+                >Minha conta</a
+              >
+            </li>
+            {% if current_user.medico %}
+            <li>
+              <a class="dropdown-item" href="{{ url_for('posts.new_post') }}"
+                >Nova postagem</a
+              >
+            </li>
+            {% endif %}
+            <li>
+              <a class="dropdown-item" href="{{ url_for('auth.logout') }}"
+                >Logout</a
+              >
+            </li>
+            {% else %}
+            <li>
+              <a class="dropdown-item" href="{{ url_for('auth.login') }}"
+                >Login</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ url_for('views.register') }}"
+                >Registrar</a
+              >
+            </li>
+            {% endif %}
+            <li>
+              <button class="dropdown-item" type="button">
+                <img
+                  class="menu-icon"
+                  src="{{ url_for('static', filename='images/icons/help.png') }}"
+                  alt="ajuda"
+                />
+              </button>
+            </li>
+          </ul>
         </div>
-        <div class="offcanvas-body">
-          <div>
-            <h4><a href="#">Destaques</a></h4>
-            <h4><a href="#">Salvos</a></h4>
-            <h4><a href="#">Ler mais tarde</a></h4>
-            <h4><a href="#">Autores favoritos</a></h4>
-            <h4><a href="#">Histórico</a></h4>
-            <h4><a href="#">Placeholder</a></h4>
-            <h4><a href="#">Placeholder</a></h4>
-            <h4><a href="#">Placeholder</a></h4>
-            <h4><a href="#">Placeholder</a></h4>
-            <h4><a href="#">Placeholder</a></h4>
-            <h4><a href="#">Placeholder</a></h4>
-            <h4><a href="#">Placeholder</a></h4>
+
+        <!-- Logo -->
+        <a class="logo" href="{{ url_for('views.home') }}">
+          <img
+            src="{{ url_for('static', filename='images/icons/logo.png') }}"
+            alt="logo"
+          />
+        </a>
+
+        <!-- Menu -->
+        <div class="toggle icon-menu">
+          <button
+            class="btn"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#staticBackdrop"
+            aria-controls="staticBackdrop"
+          >
+            <img
+              class="menu-icon"
+              src="{{ url_for('static', filename='images/icons/menu.png') }}"
+              alt="menu"
+            />
+          </button>
+        </div>
+        <div
+          class="offcanvas offcanvas-start"
+          data-bs-backdrop="static"
+          tabindex="-1"
+          id="staticBackdrop"
+          aria-labelledby="staticBackdropLabel"
+        >
+          <div class="offcanvas-header">
+            <a class="logo" href="#"
+              ><img
+                src="{{ url_for('static', filename='images/icons/logo.png') }}"
+                alt="logo"
+            /></a>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <div>
+              <h4><a href="#">Destaques</a></h4>
+              <h4><a href="#">Salvos</a></h4>
+              <h4><a href="#">Ler mais tarde</a></h4>
+              <h4>
+                <a href="{{ url_for('views.dengue_info') }}">Sobre a Dengue</a>
+              </h4>
+              <!-- Link adicionado para a página sobre AIDS -->
+              <h4>
+                <a href="{{ url_for('views.aids_info') }}">Sobre a AIDS</a>
+              </h4>
+              <h4>
+                <a href="{{ url_for('views.saude_mental_info') }}"
+                  >Saúde Mental</a
+                >
+              </h4>
+
+              <h4>
+                <a href="{{ url_for('views.gripe_covid_info') }}"
+                  >Gripe e COVID</a
+                >
+              </h4>
+
+              <h4>
+                <a href="{{ url_for('views.cancer_de_pele_info') }}"
+                  >Cancer de Pele</a
+                >
+              </h4>
+
+              <h4>
+                <a href="{{ url_for('views.campanha_do_sono_info') }}"
+                  >Campanha do Sono</a
+                >
+              </h4>
+
+              <h4>
+                <a href="{{ url_for('views.historico') }}">Histórico</a>
+              </h4>
+
+              <h4><a href="#">Placeholder</a></h4>
+              <h4><a href="#">Placeholder</a></h4>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
-  </header>
-  <!-- FIM HEADER -->
+      </nav>
+    </header>
+    <!-- FIM HEADER -->
 
-  <!-- Flash messages -->
-  <div class="flash-messages">
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %}
-    <div class="alert alert-{{ category }}">{{ message }}</div>
-    {% endfor %} {% endif %} {% endwith %}
-  </div>
+    <!-- Flash messages -->
+    <div class="flash-messages">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %}
+    </div>
 
-  <!-- Bloco de conteúdo -->
-  {% block content %} {%endblock content %}
-  <!-- Scripts -->
-  <!-- Bootstrap -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <!-- Biblioteca Inputmask -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.7-beta.27/jquery.inputmask.min.js"></script>
-  <!-- Scripts customizados -->
-  <script>
-    type = "text/javascript";
-    src = "{{ url_for('static', filename='js/scripts.js') }}";
-  </script>
-</body>
-
+    <!-- Bloco de conteúdo -->
+    {% block content %} {%endblock content %}
+    <!-- Scripts -->
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Biblioteca Inputmask -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.7-beta.27/jquery.inputmask.min.js"></script>
+    <!-- Scripts customizados -->
+    <script>
+      type = "text/javascript";
+      src = "{{ url_for('static', filename='js/scripts.js') }}";
+    </script>
+  </body>
 </html>
