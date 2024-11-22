@@ -93,14 +93,6 @@ Acesse o web GUI a partir da porta mapeada no host em `http://localhost:8888/`.
     <table style="width: 100%; border-collapse: collapse; text-align: center;">
     <tr>
         <td style="padding: 20px; border: 1px solid #ddd; vertical-align: middle;">
-            <img src="https://avatars.githubusercontent.com/u/74667067?v=4" alt="jvitor-alol" style="display: block; margin: 0 auto; width: 100px; height: 100px;">
-            <a href="https://github.com/jvitor-alol" target="_blank"><p>jvitor-alol</p></a>
-        </td>
-        <td style="padding: 20px; border: 1px solid #ddd; vertical-align: middle;">
-            <img src="https://avatars.githubusercontent.com/u/85653011?v=4" alt="Lynn-Noob" style="display: block; margin: 0 auto; width: 100px; height: 100px;">
-            <a href="https://github.com/Lynn-Noob" target="_blank"><p>Lynn-Noob</p></a>
-        </td>
-        <td style="padding: 20px; border: 1px solid #ddd; vertical-align: middle;">
             <img src="https://avatars.githubusercontent.com/u/95151247?v=4" alt="Guilherme-Soares05" style="display: block; margin: 0 auto; width: 100px; height: 100px;">
             <a href="https://github.com/Guilherme-Soares05" target="_blank"><p>Guilherme-Soares05</p></a>
         </td>
@@ -108,8 +100,6 @@ Acesse o web GUI a partir da porta mapeada no host em `http://localhost:8888/`.
             <img src="https://avatars.githubusercontent.com/u/94906196?v=4" alt="Rosicre" style="display: block; margin: 0 auto; width: 100px; height: 100px;">
             <a href="https://github.com/Rosicre" target="_blank"><p>Rosicre</p></a>
         </td>
-    </tr>
-    <tr>
         <td style="padding: 20px; border: 1px solid #ddd; vertical-align: middle;">
             <img src="https://avatars.githubusercontent.com/u/142458518?v=4" alt="mirelaads" style="display: block; margin: 0 auto; width: 100px; height: 100px;">
             <a href="https://github.com/mirelaads" target="_blank"><p>mirelaads</p></a>
@@ -118,9 +108,15 @@ Acesse o web GUI a partir da porta mapeada no host em `http://localhost:8888/`.
             <img src="https://avatars.githubusercontent.com/u/86894587?v=4" alt="dkexs" style="display: block; margin: 0 auto; width: 100px; height: 100px;">
             <a href="https://github.com/dkexs" target="_blank"><p>dkexs</p></a>
         </td>
+    </tr>
+    <tr>
         <td style="padding: 20px; border: 1px solid #ddd; vertical-align: middle;">
             <img src="https://avatars.githubusercontent.com/u/60987344?v=4" alt="PedroBrito22" style="display: block; margin: 0 auto; width: 100px; height: 100px;">
             <a href="https://github.com/PedroBrito22" target="_blank"><p>PedroBrito22</p></a>
+        </td>
+        <td style="padding: 20px; border: 1px solid #ddd; vertical-align: middle;">
+        </td>
+        <td style="padding: 20px; border: 1px solid #ddd; vertical-align: middle;">
         </td>
         <td style="padding: 20px; border: 1px solid #ddd; vertical-align: middle;">
         </td>
