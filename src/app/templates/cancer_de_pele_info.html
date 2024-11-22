@@ -1,0 +1,72 @@
+{% extends "base.html" %} {% block content %}
+<div class="container my-5">
+  <div class="text-center mb-5">
+    <h1 class="display-4 font-weight-bold text-primary">Câncer de Pele</h1>
+    <p class="text-muted">
+      Conheça os tipos, sintomas, fatores de risco e como se prevenir contra o
+      câncer de pele.
+    </p>
+  </div>
+
+  <section class="mb-5">
+    <h2 class="h4 text-success font-weight-bold mb-3">
+      O que é o Câncer de Pele?
+    </h2>
+    <p>
+      O câncer de pele é o tipo mais comum de câncer e ocorre quando células da
+      pele começam a crescer de maneira descontrolada. Existem diferentes tipos,
+      como o carcinoma basocelular, carcinoma espinocelular e o melanoma, que é
+      o mais agressivo.
+    </p>
+    <img
+      src="{{ url_for('static', filename='images/cancer_de_pele.jpg') }}"
+      alt="Ilustração sobre câncer de pele"
+      class="img-fluid rounded shadow-sm mt-3"
+    />
+  </section>
+
+  <section class="mb-5">
+    <h2 class="h4 text-danger font-weight-bold mb-3">Sintomas e Sinais</h2>
+    <p>
+      Os sintomas variam de acordo com o tipo de câncer de pele, mas sinais
+      comuns incluem:
+    </p>
+    <ul class="list-group mb-3">
+      <li class="list-group-item">Manchas ou feridas que não cicatrizam</li>
+      <li class="list-group-item">Mudanças em pintas existentes</li>
+      <li class="list-group-item">
+        Lesões com bordas irregulares ou coloração incomum
+      </li>
+    </ul>
+    <p>
+      <strong>Importante:</strong> Consulte um dermatologista caso observe
+      qualquer alteração incomum na pele.
+    </p>
+  </section>
+
+  <section class="mb-5">
+    <h2 class="h4 text-info font-weight-bold mb-3">Fatores de Risco</h2>
+    <p>Alguns fatores aumentam o risco de desenvolver câncer de pele, como:</p>
+    <ul class="list-group mb-3">
+      <li class="list-group-item">Exposição excessiva ao sol sem proteção</li>
+      <li class="list-group-item">Histórico familiar de câncer de pele</li>
+      <li class="list-group-item">Pele clara, cabelos loiros ou ruivos</li>
+    </ul>
+    <p>
+      <strong>Prevenção:</strong> Use protetor solar diariamente, evite
+      exposição solar em horários de pico e utilize roupas de proteção.
+    </p>
+  </section>
+
+  <div class="text-center">
+    <h2 class="h4 text-primary font-weight-bold">
+      Proteja-se e cuide da sua pele!
+    </h2>
+    <p class="text-muted">
+      O diagnóstico precoce salva vidas. Realize exames de pele regularmente e
+      adote hábitos saudáveis.
+    </p>
+    <a href="/contato" class="btn btn-primary btn-lg">Entre em Contato</a>
+  </div>
+</div>
+{% endblock %}

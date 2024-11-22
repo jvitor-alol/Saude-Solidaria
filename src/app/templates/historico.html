@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Histórico</h1>
+<p>Veja aqui os registros e informações armazenados.</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Data</th>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in historico_data %}
+    <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.data }}</td>
+      <td>{{ item.descricao }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container my-5">
+  <div class="text-center mb-5">
+    <h1 class="display-4 font-weight-bold text-primary">
+      Sobre a Saúde Mental
+    </h1>
+    <p class="text-muted">
+      A saúde mental é essencial para o bem-estar geral. Ela afeta como
+      pensamos, sentimos e agimos, além de influenciar nossas escolhas e
+      relacionamentos.
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <h2 class="h4 text-success font-weight-bold mb-3">
+        O que é Saúde Mental?
+      </h2>
+      <p>
+        A saúde mental engloba o bem-estar psicológico, emocional e social. Ela
+        impacta como as pessoas lidam com o estresse, como se relacionam com os
+        outros e como tomam decisões importantes.
+      </p>
+    </div>
+    <div class="col-lg-6">
+      <img
+        src="{{ url_for('static', filename='images/saude_mental.png') }}"
+        alt="Imagem sobre a Saúde Mental"
+        class="img-fluid rounded shadow-sm"
+      />
+    </div>
+  </div>
+
+  <hr class="my-5" />
+
+  <div class="row">
+    <div class="col-lg-6">
+      <h2 class="h4 text-warning font-weight-bold mb-3">
+        Sintomas Comuns de Transtornos Mentais
+      </h2>
+      <ul class="list-group">
+        <li class="list-group-item">Sentimentos de tristeza ou desesperança</li>
+        <li class="list-group-item">Ansiedade excessiva ou pânico</li>
+        <li class="list-group-item">Sentimentos de culpa ou inutilidade</li>
+        <li class="list-group-item">
+          Dificuldade de concentração ou tomada de decisões
+        </li>
+        <li class="list-group-item">
+          Alterações nos padrões de sono e apetite
+        </li>
+        <li class="list-group-item">
+          Isolamento social ou falta de interesse por atividades prazerosas
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-6">
+      <h2 class="h4 text-info font-weight-bold mb-3">
+        Como Cuidar da Sua Saúde Mental
+      </h2>
+      <ul class="list-unstyled">
+        <li class="mb-2">
+          <i class="bi bi-person-check-fill text-danger"></i>
+          <strong>Fazer atividades físicas regulares:</strong> como caminhada ou
+          yoga.
+        </li>
+        <li class="mb-2">
+          <i class="bi bi-brightness-high text-primary"></i>
+          <strong>Manter uma alimentação equilibrada:</strong> para o bem-estar
+          geral.
+        </li>
+        <li class="mb-2">
+          <i class="bi bi-pause-fill text-dark"></i>
+          <strong>Ter momentos de lazer e descanso:</strong> para reduzir o
+          estresse.
+        </li>
+        <li class="mb-2">
+          <i class="bi bi-airplane-engines text-success"></i>
+          <strong>Praticar meditação:</strong> ou técnicas de relaxamento para
+          acalmar a mente.
+        </li>
+        <li class="mb-2">
+          <i class="bi bi-moon text-muted"></i>
+          <strong>Estabelecer uma boa rotina de sono:</strong> garantindo
+          descanso adequado.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="my-5" />
+
+  <div class="text-center">
+    <h2 class="h4 text-danger font-weight-bold">
+      Quando Buscar Ajuda Profissional?
+    </h2>
+    <p class="text-muted">
+      Se você está enfrentando dificuldades emocionais ou psicológicas, é
+      importante buscar ajuda profissional. Psicólogos e psiquiatras podem
+      oferecer suporte e orientações adequadas para o tratamento de transtornos
+      mentais.
+    </p>
+    <a href="/contato" class="btn btn-primary btn-lg"> Entre em Contato </a>
+  </div>
+
+  <hr class="my-5" />
+
+  <div>
+    <h2 class="h4 text-info font-weight-bold mb-3">Recursos e Apoio</h2>
+    <ul>
+      <li>
+        <strong>CVV (Centro de Valorização da Vida):</strong>
+        <a href="https://www.cvv.org.br/" target="_blank">www.cvv.org.br</a> -
+        Oferece apoio emocional e prevenção ao suicídio.
+      </li>
+      <li>
+        <strong>Associação Brasileira de Psiquiatria (ABP):</strong>
+        <a href="https://www.abp.org.br/" target="_blank">www.abp.org.br</a> -
+        Oferece informações sobre saúde mental e encontra profissionais de saúde
+        mental.
+      </li>
+      <li>
+        <strong>Tratamento Psicoterápico:</strong> Procure um psicólogo ou
+        psiquiatra qualificado para orientação e tratamento.
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

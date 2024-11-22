@@ -1,0 +1,78 @@
+{% extends "base.html" %} {% block content %}
+<div class="container my-5">
+  <div class="text-center mb-5">
+    <h1 class="display-4 font-weight-bold text-primary">Sobre a Dengue</h1>
+    <p class="text-muted">
+      Saiba mais sobre os sintomas, formas de prevenção e como combater essa
+      doença transmitida pelo mosquito <em>Aedes aegypti</em>.
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <h2 class="h4 text-success font-weight-bold mb-3">O que é a Dengue?</h2>
+      <p>
+        A dengue é uma doença viral transmitida pelo mosquito
+        <em>Aedes aegypti</em>, que se prolifera em ambientes com água parada. É
+        uma das principais causas de epidemias em países tropicais, como o
+        Brasil.
+      </p>
+    </div>
+    <div class="col-lg-6">
+      <img
+        src="{{ url_for('static', filename='images/dengue.jpg') }}"
+        alt="Ilustração de um mosquito Aedes aegypti"
+        class="img-fluid rounded shadow-sm"
+      />
+    </div>
+  </div>
+
+  <hr class="my-5" />
+
+  <div class="row">
+    <div class="col-lg-6">
+      <h2 class="h4 text-warning font-weight-bold mb-3">Sintomas</h2>
+      <ul class="list-group">
+        <li class="list-group-item">Febre alta</li>
+        <li class="list-group-item">Dores musculares intensas</li>
+        <li class="list-group-item">Dor atrás dos olhos</li>
+        <li class="list-group-item">Manchas vermelhas na pele</li>
+        <li class="list-group-item">Fadiga e cansaço extremo</li>
+      </ul>
+    </div>
+    <div class="col-lg-6">
+      <h2 class="h4 text-info font-weight-bold mb-3">Prevenção</h2>
+      <ul class="list-unstyled">
+        <li class="mb-2">
+          <i class="bi bi-droplet-fill text-danger"></i>
+          <strong>Evite água parada:</strong> Tampe caixas d'água e elimine
+          recipientes com água acumulada.
+        </li>
+        <li class="mb-2">
+          <i class="bi bi-house-door-fill text-primary"></i>
+          <strong>Limpeza em casa:</strong> Mantenha ralos limpos e cubra
+          piscinas quando não estiverem em uso.
+        </li>
+        <li class="mb-2">
+          <i class="bi bi-bug-fill text-dark"></i>
+          <strong>Proteção pessoal:</strong> Use roupas de manga longa e
+          repelentes em áreas de risco.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="my-5" />
+
+  <div class="text-center">
+    <h2 class="h4 text-danger font-weight-bold">
+      Juntos, podemos combater a dengue!
+    </h2>
+    <p class="text-muted">
+      Faça sua parte eliminando os criadouros do mosquito e protegendo sua
+      comunidade.
+    </p>
+    <a href="/contato" class="btn btn-primary btn-lg"> Entre em Contato </a>
+  </div>
+</div>
+{% endblock %}

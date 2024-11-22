@@ -15,8 +15,8 @@ services:
     env_file:
       - ../.env
     depends_on:
-      db:
-        condition: service_healthy
+      - local-db # Altere a dependência para o novo serviço
+
   db:
     container_name: postgresql
     image: postgres:16.3-bookworm
@@ -32,6 +32,25 @@ services:
       interval: 3s
       timeout: 5s
       retries: 5
+
+  local-db:
+    container_name: local-postgresql
+    image: postgres:16.3-bookworm
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: local_password
+      POSTGRES_DB: saude_solidaria
+    ports:
+      - "5433:5432" # Mapeia a porta 5432 do container para 5433 no host
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: "pg_isready -h localhost"
+      interval: 3s
+      timeout: 5s
+      retries: 5
+
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
@@ -40,11 +59,11 @@ services:
     ports:
       - 15432:80
     depends_on:
-      db:
-        condition: service_healthy
+      - local-db # Altere a dependência para o novo serviço
     volumes:
       - pgadmin:/var/lib/pgadmin
 
 volumes:
   pgdata:
+  local_pgdata:
   pgadmin:
